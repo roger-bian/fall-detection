@@ -36,6 +36,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+# The imports below take a few seconds (30 s+ on the first run after install).
+print("[demo] importing libraries ...", flush=True)
+
 from falldet.pose import MODELS, detect_and_track, make_backend, make_tracker  # noqa: E402
 from falldet.rules import OnlineFallRuleV2, RuleParamsV2  # noqa: E402
 from falldet.stitch import TrackStitcher  # noqa: E402
