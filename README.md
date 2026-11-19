@@ -88,7 +88,7 @@ See [data/README.md](data/README.md).
 Or with make: `make webcam` (CPU), `make webcam-gpu`, `make webcam CAM=1 ARGS="--no-flip"`.
 
 Keys: `q`/`Esc` quit, `r` reset tracks and alarms, `f` mirror. Options: `--source N|file`,
-`--no-flip` (the webcam is mirrored by default, files never), `--no-stitch`, `--record out.mp4`, `--events events.jsonl` (one JSON line per fall), `--alarm-hold`
+`--no-flip` (the webcam is mirrored by default, files never), `--no-stitch`, `--fullscreen` (fill the monitor; overlay drawn at its size), `--record out.mp4`, `--events events.jsonl` (one JSON line per fall), `--alarm-hold`
 (banner seconds), `--model`, `--no-display`.
 
 - Runs the v2 rules (`results/rules_v2/REPORT.md`) through `falldet.rules.OnlineFallRuleV2`,

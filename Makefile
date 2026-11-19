@@ -5,6 +5,7 @@
 #   make webcam                       # webcam 0 on CPU
 #   make webcam-gpu                   # webcam 0 on GPU
 #   make webcam 1                     # another camera (same as CAM=1)
+#   make webcam ARGS="--fullscreen"   # fill the monitor (q / Esc to quit)
 #   make webcam ARGS="--no-flip --record recordings/run.mp4"
 #
 # Keys in the window: q / Esc quit, r reset, f toggle mirror.
@@ -28,7 +29,7 @@ DEMO   := scripts/demo_webcam.py
 .PHONY: help install install-gpu webcam webcam-gpu
 
 help:
-	@sed -n '3,10s/^# \{0,1\}//p' Makefile
+	@sed -n '3,11s/^# \{0,1\}//p' Makefile
 
 install:
 	UV_PROJECT_ENVIRONMENT=.venv-cpu uv sync --extra cpu

@@ -115,6 +115,10 @@ def main() -> int:
     ap.add_argument("--width", type=int, default=1280, help="requested camera width")
     ap.add_argument("--height", type=int, default=720, help="requested camera height")
     ap.add_argument("--display-width", type=int, default=960)
+    ap.add_argument("--fullscreen", action="store_true",
+                    help="fill the monitor the window opens on; the overlay is drawn at that "
+                         "monitor's size (read back from the window), so --display-width is "
+                         "only the starting size")
     ap.add_argument("--no-stitch", action="store_true",
                     help="use raw tracker ids (default: a person who gets a new tracker id "
                          "mid-fall keeps their history, falldet.stitch)")
@@ -151,6 +155,9 @@ def main() -> int:
     win = "fall demo v2"
     if not args.no_display:
         cv2.namedWindow(win, cv2.WINDOW_NORMAL)
+        if args.fullscreen:
+            cv2.setWindowProperty(win, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    disp_w = args.display_width
     writer = None
     events_fh = open(args.events, "a") if args.events else None
     log: deque[str] = deque(maxlen=4)
@@ -189,8 +196,8 @@ def main() -> int:
         ms = 1000 * (time.perf_counter() - t0)
         rule.tick(t)
 
-        s = args.display_width / frame.shape[1]
-        img = cv2.resize(frame, (args.display_width, int(round(frame.shape[0] * s))),
+        s = disp_w / frame.shape[1]
+        img = cv2.resize(frame, (disp_w, int(round(frame.shape[0] * s))),
                          interpolation=cv2.INTER_AREA)
         for p in people:
             tid = p["track_id"]
@@ -231,11 +238,23 @@ def main() -> int:
         if args.record:
             if writer is None:
                 fps_out = src_fps if not live else 15.0
+                rec_size = (img.shape[1], img.shape[0])
                 writer = cv2.VideoWriter(args.record, cv2.VideoWriter_fourcc(*"mp4v"), fps_out,
-                                         (img.shape[1], img.shape[0]))
-            writer.write(img)
+                                         rec_size)
+            # the recording keeps its first size (in fullscreen the overlay size can change)
+            writer.write(img if img.shape[1::-1] == rec_size else cv2.resize(img, rec_size))
         if not args.no_display:
             cv2.imshow(win, img)
+            if args.fullscreen:
+                # draw the next frame at the monitor's size (fit, keeping the aspect ratio),
+                # so OpenCV doesn't upscale a small overlay. Some backends can't report it;
+                # then OpenCV just stretches the image to the screen.
+                try:
+                    _, _, sw, sh = cv2.getWindowImageRect(win)
+                    if sw > 0 and sh > 0:
+                        disp_w = max(320, int(min(sw, sh * frame.shape[1] / frame.shape[0])))
+                except cv2.error:
+                    pass
             key = cv2.waitKey(1) & 0xFF
             if key in (ord("q"), 27):
                 reason = f"key {'Esc' if key == 27 else 'q'} pressed"
