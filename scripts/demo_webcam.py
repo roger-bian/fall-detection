@@ -89,6 +89,17 @@ class LatestFrame:
         self.thread.join(timeout=2.0)
 
 
+def center_on_screen(img: np.ndarray, sw: int, sh: int) -> np.ndarray:
+    """Place `img` in the middle of a black sw x sh canvas (cropped if it is bigger)."""
+    h, w = img.shape[:2]
+    canvas = np.zeros((sh, sw, 3), np.uint8)
+    ch, cw = min(h, sh), min(w, sw)
+    y0, x0 = (sh - ch) // 2, (sw - cw) // 2
+    iy, ix = (h - ch) // 2, (w - cw) // 2
+    canvas[y0:y0 + ch, x0:x0 + cw] = img[iy:iy + ch, ix:ix + cw]
+    return canvas
+
+
 def open_source(src: str, width: int, height: int):
     if src.isdigit():
         cap = cv2.VideoCapture(int(src))
@@ -154,10 +165,14 @@ def main() -> int:
 
     win = "fall demo v2"
     if not args.no_display:
-        cv2.namedWindow(win, cv2.WINDOW_NORMAL)
+        # fullscreen: FREERATIO so OpenCV fills the whole screen instead of letterboxing
+        # (Qt puts the letterbox bars all on one side); the demo centres the video itself
+        cv2.namedWindow(win, cv2.WINDOW_NORMAL
+                        | (cv2.WINDOW_FREERATIO if args.fullscreen else cv2.WINDOW_KEEPRATIO))
         if args.fullscreen:
             cv2.setWindowProperty(win, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     disp_w = args.display_width
+    screen = None            # (w, h) of the fullscreen window, once known
     writer = None
     events_fh = open(args.events, "a") if args.events else None
     log: deque[str] = deque(maxlen=4)
@@ -244,14 +259,15 @@ def main() -> int:
             # the recording keeps its first size (in fullscreen the overlay size can change)
             writer.write(img if img.shape[1::-1] == rec_size else cv2.resize(img, rec_size))
         if not args.no_display:
-            cv2.imshow(win, img)
+            cv2.imshow(win, center_on_screen(img, *screen) if screen else img)
             if args.fullscreen:
-                # draw the next frame at the monitor's size (fit, keeping the aspect ratio),
-                # so OpenCV doesn't upscale a small overlay. Some backends can't report it;
-                # then OpenCV just stretches the image to the screen.
+                # read the screen size back and draw the next frame to fit it (aspect kept),
+                # centred on a black canvas of exactly that size. Some backends can't
+                # report it; then OpenCV just stretches the image to the screen.
                 try:
                     _, _, sw, sh = cv2.getWindowImageRect(win)
                     if sw > 0 and sh > 0:
+                        screen = (sw, sh)
                         disp_w = max(320, int(min(sw, sh * frame.shape[1] / frame.shape[0])))
                 except cv2.error:
                     pass
