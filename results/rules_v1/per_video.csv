@@ -1,0 +1,261 @@
+video_id,dataset,activity,label,n_frames,fps,alarm_frames,onset,result,early_alarm_frames,latency_s,first_rule,cov,ids,max_abs_angle,max_angle_frame,p90_abs_angle,max_sink,max_sink_frame,motion_at_max_sink,max_sink_still,frac_still,min_motion_when_sink_hi,early_why,why,first_alarm_pos
+caucafall_S01_fall_backwards,caucafall,Fall backwards,fall,125,20.0,60,58.0,TP,0.0,0.35,angle,1.0,1,74.5,122,72.0,0.303,59,0.529,0.268,0.687,,,,
+caucafall_S01_fall_forward,caucafall,Fall forward,fall,190,20.0,61,131.0,TP,1.0,-0.15,angle,1.0,1,178.6,144,176.8,1.222,131,0.675,1.065,0.627,0.015,"first alarm f108: sink+still (1 fr, sink max 0.41, first f108 s=0.41)",,
+caucafall_S01_fall_left,caucafall,Fall left,fall,86,20.0,50,44.0,TP,2.0,-0.5,angle,0.976,1,174.7,85,171.1,1.21,67,0.1,1.189,0.439,0.031,"first alarm f32: angle (2 fr, |a| max 46°, first f32 a=-36°)",,
+caucafall_S01_fall_right,caucafall,Fall right,fall,114,20.0,57,56.0,TP,0.0,0.05,angle,1.0,1,79.8,113,78.8,0.347,56,0.448,0.301,0.69,,,,
+caucafall_S01_fall_sitting,caucafall,Fall sitting,fall,182,20.0,112,98.0,TP,18.0,-0.5,angle,1.0,1,102.1,180,95.9,1.636,123,0.145,1.582,0.607,0.018,"first alarm f70: angle (18 fr, |a| max 116°, first f70 a=+35°)",,
+caucafall_S01_hop,caucafall,Hop,adl,182,20.0,0,,TN,,,,0.984,2,14.0,12,10.4,0.227,156,0.153,0.095,0.05,,,,
+caucafall_S01_kneel,caucafall,Kneel,adl,219,20.0,66,,FP,,,,0.963,1,133.4,84,59.6,0.713,87,0.515,0.443,0.64,0.046,,"first alarm f41: angle (57 fr, |a| max 133°, first f41 a=-39°) + sink+still (19 fr, sink max 0.44, first f110 s=0.42)",
+caucafall_S01_pick_up_object,caucafall,Pick up object,adl,117,20.0,32,,FP,,,,0.983,1,176.9,49,165.4,0.429,41,0.308,0.321,0.435,0.262,,"first alarm f42: angle (32 fr, |a| max 177°, first f42 a=-41°)",
+caucafall_S01_sit_down,caucafall,Sit down,adl,187,20.0,77,,FP,,,,0.989,1,68.5,94,58.7,0.272,39,0.093,0.272,0.73,,,"first alarm f27: angle (77 fr, |a| max 68°, first f27 a=-36°)",
+caucafall_S01_walk,caucafall,Walk,adl,242,20.0,48,,FP,,,,0.992,1,56.2,134,51.5,0.656,108,0.259,0.567,0.208,0.04,,"first alarm f68: angle (45 fr, |a| max 56°, first f117 a=-37°) + sink+still (9 fr, sink max 0.57, first f68 s=0.41)",
+caucafall_S10_fall_backwards,caucafall,Fall backwards,fall,274,20.0,197,78.0,TP,0.0,-0.05,angle,1.0,1,91.3,143,87.1,0.388,212,0.028,0.388,0.913,,,,
+caucafall_S10_fall_forward,caucafall,Fall forward,fall,243,20.0,188,53.0,TP,5.0,-0.5,angle,0.979,1,179.5,63,177.1,1.468,69,0.275,1.001,0.769,0.057,"first alarm f37: angle (5 fr, |a| max 174°, first f37 a=-67°)",,
+caucafall_S10_fall_left,caucafall,Fall left,fall,212,20.0,156,50.0,TP,0.0,0.3,angle,1.0,1,86.2,112,81.4,0.951,155,0.029,0.951,0.846,0.023,,,
+caucafall_S10_fall_right,caucafall,Fall right,fall,202,20.0,139,74.0,TP,6.0,-0.5,angle,1.0,1,107.6,100,103.2,0.564,100,0.151,0.536,0.664,0.057,"first alarm f58: angle (6 fr, |a| max 47°, first f58 a=+36°)",,
+caucafall_S10_fall_sitting,caucafall,Fall sitting,fall,288,20.0,240,76.0,TP,18.0,-0.5,angle,1.0,1,89.6,256,86.6,0.251,121,0.083,0.251,0.934,,"first alarm f23: angle (18 fr, |a| max 51°, first f23 a=-35°)",,
+caucafall_S10_hop,caucafall,Hop,adl,248,20.0,1,,FP,,,,0.992,1,19.8,199,16.3,1.108,178,0.272,0.623,0.134,0.099,,"first alarm f163: sink+still (1 fr, sink max 0.62, first f163 s=0.62)",
+caucafall_S10_kneel,caucafall,Kneel,adl,261,20.0,100,,FP,,,,0.985,1,106.9,102,85.6,0.771,60,0.279,0.417,0.195,0.088,,"first alarm f29: angle (99 fr, |a| max 107°, first f29 a=-36°) + sink+still (1 fr, sink max 0.42, first f125 s=0.42)",
+caucafall_S10_pick_up_object,caucafall,Pick up object,adl,292,20.0,177,,FP,,,,0.993,1,178.4,202,170.1,0.695,43,0.373,0.332,0.252,0.127,,"first alarm f47: angle (177 fr, |a| max 178°, first f47 a=-39°)",
+caucafall_S10_sit_down,caucafall,Sit down,adl,234,20.0,37,,FP,,,,0.983,1,63.7,77,42.1,0.522,81,0.635,0.356,0.413,0.184,,"first alarm f56: angle (37 fr, |a| max 64°, first f56 a=-35°)",
+caucafall_S10_walk,caucafall,Walk,adl,224,20.0,2,,FP,,,,0.991,1,32.8,72,17.5,0.987,68,0.296,0.62,0.194,0.072,,"first alarm f222: sink+still (2 fr, sink max 0.62, first f222 s=0.62)",
+caucafall_S02_fall_backwards,caucafall,Fall backwards,fall,119,20.0,45,63.0,TP,0.0,0.3,angle,1.0,1,94.2,79,51.4,0.378,98,0.06,0.378,0.5,,,,
+caucafall_S02_fall_forward,caucafall,Fall forward,fall,106,20.0,86,24.0,TP,0.0,-0.2,angle,1.0,1,170.5,25,167.9,0.969,41,0.062,0.969,0.805,0.014,,,
+caucafall_S02_fall_left,caucafall,Fall left,fall,109,20.0,82,32.0,TP,0.0,-0.25,angle,1.0,1,107.7,32,79.9,0.565,38,0.402,0.522,0.701,0.051,,,
+caucafall_S02_fall_right,caucafall,Fall right,fall,146,20.0,117,33.0,TP,0.0,-0.2,angle,1.0,1,78.3,54,76.8,0.391,142,0.015,0.391,0.796,,,,
+caucafall_S02_fall_sitting,caucafall,Fall sitting,fall,157,20.0,54,81.0,TP,16.0,-0.5,angle,1.0,1,92.9,81,54.3,0.581,87,0.243,0.48,0.75,0.044,"first alarm f51: angle (16 fr, |a| max 128°, first f51 a=-39°)",,
+caucafall_S02_hop,caucafall,Hop,adl,171,20.0,0,,TN,,,,0.988,1,19.5,13,13.0,0.528,59,0.271,0.313,0.148,0.14,,,
+caucafall_S02_kneel,caucafall,Kneel,adl,130,20.0,12,,FP,,,,0.985,1,14.9,119,11.7,0.729,49,0.19,0.649,0.578,0.037,,"first alarm f28: sink+still (12 fr, sink max 0.65, first f28 s=0.53)",
+caucafall_S02_pick_up_object,caucafall,Pick up object,adl,166,20.0,109,,FP,,,,0.988,1,179.3,114,162.5,0.487,39,0.274,0.369,0.232,0.121,,"first alarm f38: angle (109 fr, |a| max 179°, first f38 a=-45°)",
+caucafall_S02_sit_down,caucafall,Sit down,adl,112,20.0,24,,FP,,,,0.982,1,61.0,39,51.4,0.562,55,0.24,0.35,0.409,0.195,,"first alarm f32: angle (24 fr, |a| max 61°, first f32 a=-38°)",
+caucafall_S02_walk,caucafall,Walk,adl,244,20.0,14,,FP,,,,0.992,1,19.6,69,10.2,0.671,51,0.128,0.533,0.471,0.047,,"first alarm f34: sink+still (14 fr, sink max 0.53, first f34 s=0.42)",
+caucafall_S03_fall_backwards,caucafall,Fall backwards,fall,166,20.0,99,67.0,TP,0.0,0.0,angle,1.0,1,117.7,98,105.1,0.49,86,0.152,0.379,0.424,0.135,,,
+caucafall_S03_fall_forward,caucafall,Fall forward,fall,153,20.0,79,84.0,TP,3.0,-0.4,angle,0.986,1,179.9,99,175.5,2.025,112,0.088,2.025,0.397,0.028,"first alarm f71: angle (3 fr, |a| max 62°, first f71 a=-35°)",,
+caucafall_S03_fall_left,caucafall,Fall left,fall,171,20.0,66,102.0,TP,2.0,-0.5,angle,0.812,1,177.4,170,175.8,0.301,154,0.052,0.301,0.482,,"first alarm f90: angle (2 fr, |a| max 38°, first f90 a=-37°)",,
+caucafall_S03_fall_right,caucafall,Fall right,fall,220,20.0,160,53.0,TP,0.0,0.35,angle,1.0,1,64.0,185,60.0,0.286,53,0.639,0.22,0.892,,,,
+caucafall_S03_fall_sitting,caucafall,Fall sitting,fall,202,20.0,128,51.0,TP,0.0,0.8,angle,0.987,1,74.3,89,61.8,0.614,164,1.349,0.35,0.242,1.295,,,
+caucafall_S03_hop,caucafall,Hop,adl,162,20.0,1,,FP,,,,0.988,1,14.6,68,12.0,0.819,74,0.156,0.763,0.113,0.089,,"first alarm f72: sink+still (1 fr, sink max 0.76, first f72 s=0.76)",
+caucafall_S03_kneel,caucafall,Kneel,adl,213,20.0,40,,FP,,,,0.948,1,68.5,48,40.8,1.122,87,0.197,0.669,0.223,0.083,,"first alarm f41: angle (38 fr, |a| max 68°, first f41 a=-47°) + sink+still (2 fr, sink max 0.67, first f97 s=0.67)",
+caucafall_S03_pick_up_object,caucafall,Pick up object,adl,186,20.0,75,,FP,,,,0.989,1,179.8,107,175.4,0.919,43,0.503,0.245,0.304,0.135,,"first alarm f45: angle (75 fr, |a| max 180°, first f45 a=-106°)",
+caucafall_S03_sit_down,caucafall,Sit down,adl,261,20.0,107,,FP,,,,0.992,1,69.9,87,61.2,0.359,82,0.18,0.3,0.216,,,"first alarm f61: angle (107 fr, |a| max 70°, first f61 a=-38°)",
+caucafall_S03_walk,caucafall,Walk,adl,176,20.0,1,,FP,,,,0.989,1,26.3,107,20.7,0.461,99,0.128,0.409,0.172,0.084,,"first alarm f109: sink+still (1 fr, sink max 0.41, first f109 s=0.41)",
+caucafall_S04_fall_backwards,caucafall,Fall backwards,fall,192,20.0,123,70.0,TP,0.0,-0.15,angle,1.0,1,179.9,79,179.3,0.987,85,0.113,0.982,0.869,0.023,,,
+caucafall_S04_fall_forward,caucafall,Fall forward,fall,168,20.0,154,25.0,TP,1.0,-0.5,angle,1.0,1,179.9,132,178.9,1.656,53,0.02,1.656,0.909,0.005,"first alarm f14: angle (1 fr, |a| max 126°, first f14 a=-126°)",,
+caucafall_S04_fall_left,caucafall,Fall left,fall,162,20.0,114,61.0,TP,3.0,-0.5,angle,1.0,1,61.3,98,60.5,0.174,62,0.325,0.128,0.881,,"first alarm f48: angle (3 fr, |a| max 58°, first f48 a=+36°)",,
+caucafall_S04_fall_right,caucafall,Fall right,fall,150,20.0,96,47.0,TP,0.0,-0.35,angle,1.0,1,52.1,111,50.0,0.212,148,0.086,0.212,0.728,,,,
+caucafall_S04_fall_sitting,caucafall,Fall sitting,fall,198,20.0,14,61.0,FN,14.0,,,1.0,1,25.7,73,17.2,0.176,79,0.104,0.164,0.854,,"first alarm f13: angle (14 fr, |a| max 44°, first f13 a=-37°)",max |angle| 25.7° < 35; max sink 0.176 < 0.4,
+caucafall_S04_hop,caucafall,Hop,adl,144,20.0,0,,TN,,,,0.986,1,18.8,111,14.3,0.456,86,0.289,0.007,0.028,0.248,,,
+caucafall_S04_kneel,caucafall,Kneel,adl,222,20.0,7,,FP,,,,0.991,1,22.3,77,19.0,0.842,41,0.136,0.824,0.409,0.065,,"first alarm f37: sink+still (7 fr, sink max 0.82, first f37 s=0.82)",
+caucafall_S04_pick_up_object,caucafall,Pick up object,adl,179,20.0,0,,TN,,,,0.989,1,19.0,67,15.0,0.32,55,0.062,0.32,0.785,,,,
+caucafall_S04_sit_down,caucafall,Sit down,adl,199,20.0,24,,FP,,,,0.99,1,96.6,97,50.7,0.296,81,0.197,0.231,0.543,,,"first alarm f87: angle (24 fr, |a| max 97°, first f87 a=-39°)",
+caucafall_S04_walk,caucafall,Walk,adl,240,20.0,0,,TN,,,,0.992,1,25.0,132,18.9,0.561,41,0.146,0.392,0.307,0.118,,,
+caucafall_S05_fall_backwards,caucafall,Fall backwards,fall,214,20.0,175,48.0,TP,7.0,-0.1,angle,1.0,1,94.4,204,89.6,0.536,67,0.05,0.536,0.837,0.046,"first alarm f30: angle (7 fr, |a| max 122°, first f30 a=-38°)",,
+caucafall_S05_fall_forward,caucafall,Fall forward,fall,200,20.0,149,58.0,TP,0.0,-0.35,angle,1.0,1,180.0,191,179.1,1.927,90,0.059,1.927,0.859,0.011,,,
+caucafall_S05_fall_left,caucafall,Fall left,fall,247,20.0,194,76.0,TP,17.0,-0.5,angle,1.0,1,104.7,131,103.0,0.962,90,0.254,0.729,0.906,0.028,"first alarm f49: angle (17 fr, |a| max 177°, first f49 a=-39°)",,
+caucafall_S05_fall_right,caucafall,Fall right,fall,219,20.0,157,75.0,TP,4.0,-0.5,angle,0.993,1,126.1,82,116.7,1.12,105,0.03,1.12,0.678,0.025,"first alarm f61: angle (4 fr, |a| max 68°, first f61 a=-35°)",,
+caucafall_S05_fall_sitting,caucafall,Fall sitting,fall,229,20.0,184,69.0,TP,14.0,-0.5,angle,1.0,1,108.5,91,105.6,0.633,99,0.059,0.633,0.844,0.02,"first alarm f3: angle (14 fr, |a| max 102°, first f3 a=-36°)",,
+caucafall_S05_hop,caucafall,Hop,adl,122,20.0,0,,TN,,,,0.984,1,21.3,98,17.5,0.602,52,0.306,,0.0,0.127,,,
+caucafall_S05_kneel,caucafall,Kneel,adl,208,20.0,27,,FP,,,,0.99,1,117.8,162,22.1,0.746,76,0.208,0.626,0.325,0.064,,"first alarm f32: angle (17 fr, |a| max 118°, first f151 a=+68°) + sink+still (10 fr, sink max 0.63, first f32 s=0.40)",
+caucafall_S05_pick_up_object,caucafall,Pick up object,adl,271,20.0,130,,FP,,,,0.993,1,160.0,222,130.8,0.45,88,0.154,0.395,0.572,0.115,,"first alarm f69: angle (130 fr, |a| max 160°, first f69 a=+35°)",
+caucafall_S05_sit_down,caucafall,Sit down,adl,260,20.0,58,,FP,,,,0.992,1,84.3,93,73.8,0.417,124,0.198,0.335,0.5,0.198,,"first alarm f77: angle (58 fr, |a| max 84°, first f77 a=-36°)",
+caucafall_S05_walk,caucafall,Walk,adl,226,20.0,14,,FP,,,,0.991,1,19.4,76,14.8,0.45,75,0.101,0.449,0.656,0.07,,"first alarm f57: sink+still (14 fr, sink max 0.45, first f57 s=0.40)",
+caucafall_S06_fall_backwards,caucafall,Fall backwards,fall,234,20.0,143,91.0,TP,0.0,0.0,angle,1.0,1,57.0,210,55.3,0.327,124,0.065,0.327,0.923,,,,
+caucafall_S06_fall_forward,caucafall,Fall forward,fall,202,20.0,128,83.0,TP,0.0,-0.45,angle,1.0,1,172.7,83,168.6,1.211,105,0.067,1.211,0.84,0.026,,,
+caucafall_S06_fall_left,caucafall,Fall left,fall,229,20.0,190,51.0,TP,2.0,-0.5,angle,1.0,1,160.9,52,101.7,0.859,78,0.038,0.859,0.893,0.019,"first alarm f39: angle (2 fr, |a| max 168°, first f39 a=+160°)",,
+caucafall_S06_fall_right,caucafall,Fall right,fall,229,20.0,164,81.0,TP,6.0,-0.5,angle,1.0,1,115.5,156,113.8,0.504,93,0.117,0.492,0.885,0.034,"first alarm f65: angle (6 fr, |a| max 76°, first f65 a=-39°)",,
+caucafall_S06_fall_sitting,caucafall,Fall sitting,fall,248,20.0,167,107.0,TP,17.0,-0.5,angle,0.993,1,110.5,243,99.5,0.938,125,0.067,0.938,0.836,0.023,"first alarm f79: angle (17 fr, |a| max 152°, first f79 a=+59°)",,
+caucafall_S06_hop,caucafall,Hop,adl,162,20.0,0,,TN,,,,0.988,1,20.7,96,17.1,0.774,72,0.397,0.063,0.056,0.112,,,
+caucafall_S06_kneel,caucafall,Kneel,adl,189,20.0,1,,FP,,,,0.989,1,21.8,168,18.0,0.701,46,0.156,0.486,0.39,0.084,,"first alarm f52: sink+still (1 fr, sink max 0.49, first f52 s=0.49)",
+caucafall_S06_pick_up_object,caucafall,Pick up object,adl,202,20.0,102,,FP,,,,0.99,1,142.2,126,139.7,0.506,91,0.2,0.299,0.305,0.105,,"first alarm f54: angle (102 fr, |a| max 142°, first f54 a=-38°)",
+caucafall_S06_sit_down,caucafall,Sit down,adl,189,20.0,35,,FP,,,,0.984,1,89.9,72,71.5,0.395,115,0.081,0.395,0.366,,,"first alarm f62: angle (35 fr, |a| max 90°, first f62 a=-36°)",
+caucafall_S06_walk,caucafall,Walk,adl,266,20.0,14,,FP,,,,0.992,1,22.4,79,15.0,0.615,74,0.167,0.603,0.458,0.078,,"first alarm f40: sink+still (14 fr, sink max 0.60, first f40 s=0.53)",
+caucafall_S07_fall_backwards,caucafall,Fall backwards,fall,252,20.0,163,92.0,TP,0.0,-0.15,angle,1.0,1,96.4,180,93.3,0.404,107,0.086,0.404,0.906,0.086,,,
+caucafall_S07_fall_forward,caucafall,Fall forward,fall,162,20.0,122,43.0,TP,0.0,-0.4,angle,0.992,1,179.9,112,178.9,1.268,59,0.303,0.95,0.831,0.031,,,
+caucafall_S07_fall_left,caucafall,Fall left,fall,212,20.0,147,73.0,TP,1.0,-0.45,angle,1.0,1,121.3,74,99.7,0.729,98,0.028,0.729,0.878,0.02,"first alarm f62: angle (1 fr, |a| max 171°, first f62 a=+171°)",,
+caucafall_S07_fall_right,caucafall,Fall right,fall,166,20.0,118,46.0,TP,0.0,0.1,angle,1.0,1,111.2,147,106.9,0.523,130,0.05,0.523,0.742,0.024,,,
+caucafall_S07_fall_sitting,caucafall,Fall sitting,fall,207,20.0,151,47.0,TP,6.0,0.35,angle,1.0,1,89.0,205,80.9,0.39,191,0.021,0.39,0.825,,"first alarm f2: angle (6 fr, |a| max 61°, first f2 a=-61°)",,
+caucafall_S07_hop,caucafall,Hop,adl,198,20.0,0,,TN,,,,0.99,1,17.7,4,10.0,0.868,140,0.284,0.215,0.031,0.11,,,
+caucafall_S07_kneel,caucafall,Kneel,adl,202,20.0,61,,FP,,,,0.985,1,177.6,104,111.9,0.933,55,0.265,0.268,0.04,0.14,,"first alarm f18: angle (61 fr, |a| max 178°, first f18 a=-37°)",
+caucafall_S07_pick_up_object,caucafall,Pick up object,adl,153,20.0,61,,FP,,,,0.987,1,138.8,80,134.1,0.24,133,0.03,0.24,0.265,,,"first alarm f52: angle (61 fr, |a| max 139°, first f52 a=-38°)",
+caucafall_S07_sit_down,caucafall,Sit down,adl,193,20.0,65,,FP,,,,0.99,1,41.6,114,40.2,0.291,30,0.239,0.255,0.429,,,"first alarm f92: angle (65 fr, |a| max 42°, first f92 a=+35°)",
+caucafall_S07_walk,caucafall,Walk,adl,193,20.0,1,,FP,,,,0.99,1,24.2,2,20.1,0.707,155,0.209,0.443,0.162,0.089,,"first alarm f122: sink+still (1 fr, sink max 0.44, first f122 s=0.44)",
+caucafall_S08_fall_backwards,caucafall,Fall backwards,fall,212,20.0,147,64.0,TP,0.0,0.05,angle,1.0,1,98.6,203,96.4,0.777,111,0.042,0.777,0.838,0.017,,,
+caucafall_S08_fall_forward,caucafall,Fall forward,fall,122,20.0,84,40.0,TP,1.0,-0.05,angle,1.0,1,180.0,111,179.6,0.463,77,0.044,0.463,0.768,0.016,"first alarm f29: angle (1 fr, |a| max 132°, first f29 a=-132°)",,
+caucafall_S08_fall_left,caucafall,Fall left,fall,202,20.0,150,57.0,TP,5.0,0.0,angle,1.0,1,101.2,144,97.9,0.328,90,0.028,0.328,0.897,,"first alarm f36: angle (5 fr, |a| max 88°, first f36 a=-41°)",,
+caucafall_S08_fall_right,caucafall,Fall right,fall,229,20.0,183,59.0,TP,6.0,-0.5,angle,0.982,1,88.4,117,84.6,0.409,162,0.046,0.409,0.838,0.046,"first alarm f43: angle (6 fr, |a| max 54°, first f43 a=-40°)",,
+caucafall_S08_fall_sitting,caucafall,Fall sitting,fall,234,20.0,170,80.0,TP,6.0,-0.5,angle,1.0,1,90.5,80,73.4,1.003,111,0.041,1.003,0.883,0.036,"first alarm f64: angle (6 fr, |a| max 92°, first f64 a=+41°)",,
+caucafall_S08_hop,caucafall,Hop,adl,166,20.0,0,,TN,,,,0.988,1,17.1,159,13.6,1.019,147,0.352,0.14,0.116,0.104,,,
+caucafall_S08_kneel,caucafall,Kneel,adl,256,20.0,83,,FP,,,,0.969,1,99.7,95,78.6,0.85,255,0.202,0.543,0.198,0.068,,"first alarm f35: angle (80 fr, |a| max 100°, first f35 a=-36°) + sink+still (3 fr, sink max 0.54, first f247 s=0.47)",
+caucafall_S08_pick_up_object,caucafall,Pick up object,adl,266,20.0,209,,FP,,,,0.992,1,170.8,117,162.5,0.466,40,0.151,0.456,0.405,0.052,,"first alarm f39: angle (209 fr, |a| max 171°, first f39 a=-36°) + sink+still (3 fr, sink max 0.46, first f155 s=0.46)",
+caucafall_S08_sit_down,caucafall,Sit down,adl,212,20.0,134,,FP,,,,0.991,1,59.6,62,47.0,0.362,67,0.144,0.329,0.576,,,"first alarm f47: angle (134 fr, |a| max 60°, first f47 a=-35°)",
+caucafall_S08_walk,caucafall,Walk,adl,216,20.0,8,,FP,,,,0.991,1,26.8,15,18.7,0.64,203,0.138,0.494,0.369,0.081,,"first alarm f184: sink+still (8 fr, sink max 0.49, first f184 s=0.47)",
+caucafall_S09_fall_backwards,caucafall,Fall backwards,fall,252,20.0,197,65.0,TP,7.0,-0.15,angle,1.0,1,88.7,169,85.4,0.537,80,0.075,0.537,0.92,0.053,"first alarm f41: angle (7 fr, |a| max 145°, first f41 a=-48°)",,
+caucafall_S09_fall_forward,caucafall,Fall forward,fall,148,20.0,106,56.0,TP,5.0,-0.5,angle,0.989,1,179.6,57,175.0,1.235,82,0.023,1.235,0.835,0.013,"first alarm f41: angle (5 fr, |a| max 179°, first f41 a=-78°)",,
+caucafall_S09_fall_left,caucafall,Fall left,fall,207,20.0,179,55.0,TP,18.0,-0.5,angle,0.993,1,179.0,56,147.8,1.248,72,0.101,0.993,0.834,0.046,"first alarm f27: angle (18 fr, |a| max 162°, first f27 a=-37°)",,
+caucafall_S09_fall_right,caucafall,Fall right,fall,189,20.0,149,57.0,TP,7.0,-0.5,angle,1.0,1,118.0,70,106.2,1.131,89,0.106,1.113,0.826,0.028,"first alarm f40: angle (7 fr, |a| max 72°, first f40 a=-35°)",,
+caucafall_S09_fall_sitting,caucafall,Fall sitting,fall,216,20.0,156,89.0,TP,19.0,-0.5,angle,1.0,1,131.0,96,115.3,0.816,105,0.089,0.816,0.898,0.024,"first alarm f60: angle (19 fr, |a| max 151°, first f60 a=+80°)",,
+caucafall_S09_hop,caucafall,Hop,adl,212,20.0,0,,TN,,,,0.991,1,24.1,105,21.4,0.58,71,0.363,0.282,0.124,0.133,,,
+caucafall_S09_kneel,caucafall,Kneel,adl,216,20.0,15,,FP,,,,0.991,1,24.3,142,16.1,0.554,84,0.157,0.5,0.537,0.046,,"first alarm f44: sink+still (15 fr, sink max 0.50, first f44 s=0.41)",
+caucafall_S09_pick_up_object,caucafall,Pick up object,adl,220,20.0,100,,FP,,,,0.991,1,123.9,183,40.4,0.443,42,0.083,0.443,0.67,0.03,,"first alarm f41: angle (76 fr, |a| max 124°, first f58 a=-35°) + sink+still (25 fr, sink max 0.44, first f41 s=0.43)",
+caucafall_S09_sit_down,caucafall,Sit down,adl,238,20.0,32,,FP,,,,0.992,1,95.8,65,55.6,0.436,90,0.255,0.424,0.606,0.075,,"first alarm f55: angle (31 fr, |a| max 96°, first f55 a=-44°) + sink+still (1 fr, sink max 0.42, first f100 s=0.42)",
+caucafall_S09_walk,caucafall,Walk,adl,234,20.0,1,,FP,,,,0.991,1,25.9,83,21.3,0.705,82,0.152,0.568,0.358,0.096,,"first alarm f69: sink+still (1 fr, sink max 0.57, first f69 s=0.57)",
+gmdcsa24_S01_fall_01,gmdcsa24,Fall,fall,203,29.563,52,,TP,,,angle,0.645,1,96.3,122,87.6,0.668,128,0.533,0.037,0.733,0.408,,,0.4
+gmdcsa24_S01_fall_02,gmdcsa24,Fall,fall,189,29.686,31,,TP,,,angle,0.444,1,98.0,84,85.6,0.579,78,0.66,0.051,0.571,0.406,,,0.29
+gmdcsa24_S01_fall_03,gmdcsa24,Fall,fall,176,29.663,107,,TP,,,angle,0.989,1,102.4,133,100.6,0.695,137,0.023,0.695,0.759,0.019,,,0.39
+gmdcsa24_S01_fall_04,gmdcsa24,Fall,fall,146,29.595,77,,TP,,,angle,0.986,1,104.3,120,102.2,0.762,132,0.02,0.762,0.708,0.012,,,0.47
+gmdcsa24_S01_fall_05,gmdcsa24,Fall,fall,174,29.659,109,,TP,,,angle,0.989,1,98.6,145,97.4,0.511,114,0.04,0.511,0.61,0.015,,,0.37
+gmdcsa24_S01_fall_06,gmdcsa24,Fall,fall,169,29.649,94,,TP,,,angle,0.988,2,127.5,117,119.2,0.54,129,0.169,0.486,0.48,0.033,,,0.44
+gmdcsa24_S01_fall_07,gmdcsa24,Fall,fall,153,29.613,115,,TP,,,angle,0.987,1,121.8,107,119.4,0.58,65,0.457,0.53,0.464,0.027,,,0.25
+gmdcsa24_S01_fall_08,gmdcsa24,Fall,fall,129,29.769,94,,TP,,,angle,0.984,1,107.8,97,106.8,0.596,102,0.034,0.596,0.472,0.019,,,0.27
+gmdcsa24_S01_fall_09,gmdcsa24,Fall,fall,131,28.897,93,,TP,,,angle,0.969,1,178.2,64,168.4,0.848,92,0.133,0.782,0.197,0.095,,,0.27
+gmdcsa24_S01_fall_10,gmdcsa24,Fall,fall,133,29.556,92,,TP,,,angle,0.985,1,135.8,71,132.1,0.663,80,0.063,0.663,0.595,0.045,,,0.31
+gmdcsa24_S01_fall_11,gmdcsa24,Fall,fall,181,29.672,127,,TP,,,angle,0.989,1,84.4,144,82.9,0.41,51,0.8,0.397,0.754,0.635,,,0.23
+gmdcsa24_S01_fall_12,gmdcsa24,Fall,fall,200,28.986,115,,TP,,,angle,0.99,1,85.4,180,83.4,0.485,123,0.022,0.485,0.788,0.022,,,0.42
+gmdcsa24_S01_fall_13,gmdcsa24,Fall,fall,128,29.538,12,,TP,,,sink+still,0.984,1,32.9,125,25.7,0.422,30,0.866,0.418,0.524,0.046,,,0.45
+gmdcsa24_S01_fall_14,gmdcsa24,Fall,fall,169,29.649,0,,FN,,,,0.988,1,27.2,23,16.3,0.474,56,0.316,0.394,0.479,0.121,,max |angle| 27.2° < 35; sink reached 0.474 but never while still (min motion 0.121 > 0.1),
+gmdcsa24_S01_fall_15,gmdcsa24,Fall,fall,178,29.667,129,,TP,,,angle,0.989,2,91.7,138,90.8,0.754,127,0.018,0.754,0.62,0.017,,,0.28
+gmdcsa24_S01_fall_16,gmdcsa24,Fall,fall,181,29.672,104,,TP,,,angle,0.989,1,101.9,160,100.0,0.591,158,0.022,0.591,0.648,0.012,,,0.43
+gmdcsa24_S01_adl_01,gmdcsa24,ADL,adl,245,29.637,213,,FP,,,,0.992,1,89.1,94,86.4,0.105,111,0.024,0.105,0.844,,,"first alarm f32: angle (213 fr, |a| max 89°, first f32 a=-35°)",
+gmdcsa24_S01_adl_02,gmdcsa24,ADL,adl,198,29.552,178,,FP,,,,0.99,1,92.0,77,90.8,0.109,120,0.017,0.109,0.781,,,"first alarm f20: angle (178 fr, |a| max 92°, first f20 a=+35°)",
+gmdcsa24_S01_adl_03,gmdcsa24,ADL,adl,199,29.701,185,,FP,,,,0.99,1,95.6,60,93.0,0.158,115,0.01,0.158,0.802,,,"first alarm f14: angle (185 fr, |a| max 96°, first f14 a=+39°)",
+gmdcsa24_S01_adl_04,gmdcsa24,ADL,adl,170,29.143,72,,FP,,,,0.988,1,93.6,20,92.9,0.2,44,0.097,0.2,0.619,,,"first alarm f2: angle (72 fr, |a| max 94°, first f2 a=+93°)",
+gmdcsa24_S01_adl_05,gmdcsa24,ADL,adl,314,29.81,42,,FP,,,,0.841,1,55.9,66,45.1,0.255,115,0.143,0.253,0.765,,,"first alarm f50: angle (42 fr, |a| max 56°, first f50 a=-39°)",
+gmdcsa24_S01_adl_06,gmdcsa24,ADL,adl,364,29.755,11,,FP,,,,0.995,1,36.6,91,34.2,0.128,132,0.027,0.128,0.845,,,"first alarm f83: angle (11 fr, |a| max 37°, first f83 a=-35°)",
+gmdcsa24_S01_adl_07,gmdcsa24,ADL,adl,224,29.735,0,,TN,,,,0.991,1,5.8,125,4.6,0.058,146,0.053,0.058,0.991,,,,
+gmdcsa24_S01_adl_08,gmdcsa24,ADL,adl,187,29.683,0,,TN,,,,0.984,2,6.6,122,4.8,0.056,98,0.138,0.054,0.136,,,,
+gmdcsa24_S01_adl_09,gmdcsa24,ADL,adl,147,29.4,0,,TN,,,,0.986,1,4.7,120,4.0,0.078,131,0.108,0.061,0.159,,,,
+gmdcsa24_S01_adl_10,gmdcsa24,ADL,adl,115,29.237,0,,TN,,,,0.983,1,4.9,41,3.9,0.05,68,0.038,0.05,0.442,,,,
+gmdcsa24_S01_adl_11,gmdcsa24,ADL,adl,277,29.785,22,,FP,,,,0.993,1,52.4,66,28.9,0.247,113,0.25,0.238,0.702,,,"first alarm f61: angle (22 fr, |a| max 52°, first f61 a=-40°)",
+gmdcsa24_S01_adl_12,gmdcsa24,ADL,adl,218,29.727,0,,TN,,,,0.991,1,22.3,147,15.8,0.027,188,0.109,0.027,0.681,,,,
+gmdcsa24_S01_adl_13,gmdcsa24,ADL,adl,187,29.683,17,,FP,,,,0.989,1,57.2,93,32.1,0.295,128,0.062,0.295,0.47,,,"first alarm f85: angle (17 fr, |a| max 57°, first f85 a=+39°)",
+gmdcsa24_S01_adl_14,gmdcsa24,ADL,adl,173,29.489,12,,FP,,,,0.983,1,42.8,25,26.4,0.043,108,0.168,0.028,0.365,,,"first alarm f19: angle (12 fr, |a| max 43°, first f19 a=+37°)",
+gmdcsa24_S01_adl_15,gmdcsa24,ADL,adl,212,29.581,45,,FP,,,,0.991,1,97.3,58,59.8,0.282,128,0.276,0.269,0.338,,,"first alarm f43: angle (45 fr, |a| max 97°, first f43 a=-36°)",
+gmdcsa24_S01_adl_16,gmdcsa24,ADL,adl,104,29.434,35,,FP,,,,0.981,1,78.2,36,74.0,0.098,101,0.026,0.098,0.284,,,"first alarm f20: angle (35 fr, |a| max 78°, first f20 a=+37°)",
+gmdcsa24_S02_fall_01,gmdcsa24,Fall,fall,190,29.843,136,,TP,,,angle,0.989,1,94.5,106,84.5,0.727,129,0.009,0.727,0.606,0.006,,,0.28
+gmdcsa24_S02_fall_02,gmdcsa24,Fall,fall,252,29.764,162,,TP,,,angle,0.992,1,110.4,234,106.8,0.667,161,0.184,0.624,0.388,0.039,,,0.36
+gmdcsa24_S02_fall_03,gmdcsa24,Fall,fall,210,29.858,208,,TP,,,angle,0.99,1,92.1,181,91.5,0.301,36,0.1,0.301,0.889,,,,0.01
+gmdcsa24_S02_fall_04,gmdcsa24,Fall,fall,305,29.902,167,,TP,,,angle,0.993,1,110.7,234,109.0,0.629,150,0.147,0.602,0.71,0.078,,,0.41
+gmdcsa24_S02_fall_05,gmdcsa24,Fall,fall,135,30.0,105,,TP,,,angle,0.985,1,85.6,63,82.0,0.532,116,0.034,0.532,0.429,0.012,,,0.22
+gmdcsa24_S02_fall_06,gmdcsa24,Fall,fall,194,29.846,91,,TP,,,angle,0.99,1,90.9,116,89.0,0.514,103,0.658,0.497,0.766,0.02,,,0.53
+gmdcsa24_S02_fall_07,gmdcsa24,Fall,fall,135,29.779,108,,TP,,,angle,0.985,1,91.3,78,88.4,0.85,134,0.012,0.85,0.429,0.012,,,0.2
+gmdcsa24_S02_fall_08,gmdcsa24,Fall,fall,181,29.835,84,,TP,,,angle,0.989,1,101.9,117,98.8,0.103,135,0.05,0.103,0.771,,,,0.54
+gmdcsa24_S02_fall_09,gmdcsa24,Fall,fall,167,29.821,105,,TP,,,angle,0.97,3,146.8,101,102.4,0.811,120,0.217,0.143,0.115,0.11,,,0.34
+gmdcsa24_S02_fall_10,gmdcsa24,Fall,fall,167,14.985,132,,TP,,,angle,0.964,2,123.8,159,121.6,1.109,68,0.164,0.963,0.551,0.088,,,0.19
+gmdcsa24_S02_fall_11,gmdcsa24,Fall,fall,159,14.985,141,,TP,,,angle,0.987,2,106.4,157,105.0,3.328,119,0.015,3.328,0.675,0.015,,,0.11
+gmdcsa24_S02_fall_12,gmdcsa24,Fall,fall,184,14.985,34,,TP,,,angle,0.837,1,147.5,149,111.1,0.616,120,0.667,0.574,0.656,0.069,,,0.66
+gmdcsa24_S02_fall_13,gmdcsa24,Fall,fall,133,14.985,93,,TP,,,angle,0.985,1,102.0,109,100.1,0.507,57,0.396,0.473,0.618,0.071,,,0.02
+gmdcsa24_S02_fall_14,gmdcsa24,Fall,fall,168,14.985,105,,TP,,,angle,0.976,2,89.0,123,85.0,0.171,61,0.957,0.161,0.878,,,,0.36
+gmdcsa24_S02_fall_15,gmdcsa24,Fall,fall,348,29.829,156,,TP,,,angle,0.994,1,178.9,256,143.2,0.725,251,1.442,0.536,0.679,0.069,,,0.01
+gmdcsa24_S02_fall_16,gmdcsa24,Fall,fall,120,29.752,77,,TP,,,angle,0.983,1,99.0,97,98.8,0.512,55,0.53,0.499,0.669,0.013,,,0.36
+gmdcsa24_S02_fall_17,gmdcsa24,Fall,fall,194,29.846,101,,TP,,,angle,0.99,1,114.6,111,110.7,0.648,125,0.05,0.648,0.682,0.026,,,0.48
+gmdcsa24_S02_fall_18,gmdcsa24,Fall,fall,345,29.827,76,,TP,,,angle,0.994,1,102.1,339,70.5,0.642,331,0.562,0.634,0.72,0.028,,,0.01
+gmdcsa24_S02_fall_19,gmdcsa24,Fall,fall,463,29.871,207,,TP,,,angle,0.996,1,87.3,270,76.0,0.579,329,0.008,0.579,0.885,0.003,,,0.55
+gmdcsa24_S02_fall_20,gmdcsa24,Fall,fall,342,29.826,88,,TP,,,angle,0.994,1,97.6,274,94.4,0.469,321,0.005,0.469,0.865,0.005,,,0.74
+gmdcsa24_S02_fall_21,gmdcsa24,Fall,fall,283,29.789,81,,TP,,,angle,0.993,1,103.1,222,96.2,0.623,219,0.345,0.61,0.797,0.007,,,0.71
+gmdcsa24_S02_fall_22,gmdcsa24,Fall,fall,155,29.808,102,,TP,,,angle,0.987,1,110.0,137,108.7,0.687,76,0.264,0.666,0.582,0.021,,,0.34
+gmdcsa24_S02_fall_23,gmdcsa24,Fall,fall,225,29.867,178,,TP,,,angle,0.991,1,102.5,222,101.7,0.786,147,0.25,0.766,0.821,0.021,,,0.06
+gmdcsa24_S02_fall_24,gmdcsa24,Fall,fall,213,29.86,89,,TP,,,angle,0.991,1,133.6,125,114.5,1.005,122,0.907,0.8,0.711,0.036,,,0.58
+gmdcsa24_S02_fall_25,gmdcsa24,Fall,fall,218,29.863,155,,TP,,,angle,0.991,1,109.1,131,105.0,0.736,110,0.899,0.635,0.681,0.021,,,0.01
+gmdcsa24_S02_adl_01,gmdcsa24,ADL,adl,340,29.825,4,,FP,,,,0.994,1,43.9,210,21.7,0.089,295,0.039,0.089,0.822,,,"first alarm f206: angle (4 fr, |a| max 44°, first f206 a=-36°)",
+gmdcsa24_S02_adl_02,gmdcsa24,ADL,adl,352,29.915,77,,FP,,,,0.994,1,163.6,211,51.2,0.304,234,0.264,0.235,0.571,,,"first alarm f57: angle (77 fr, |a| max 164°, first f57 a=+37°)",
+gmdcsa24_S02_adl_03,gmdcsa24,ADL,adl,356,29.832,147,,FP,,,,0.994,1,90.5,330,87.8,0.225,207,0.053,0.225,0.455,,,"first alarm f31: angle (147 fr, |a| max 90°, first f31 a=-35°)",
+gmdcsa24_S02_adl_04,gmdcsa24,ADL,adl,234,29.872,118,,FP,,,,0.991,1,114.5,112,108.9,0.079,168,0.047,0.079,0.56,,,"first alarm f28: angle (118 fr, |a| max 115°, first f28 a=-36°)",
+gmdcsa24_S02_adl_05,gmdcsa24,ADL,adl,323,29.815,21,,FP,,,,0.994,4,67.4,100,19.1,0.035,155,0.172,0.028,0.531,,,"first alarm f88: angle (21 fr, |a| max 67°, first f88 a=-36°)",
+gmdcsa24_S02_adl_06,gmdcsa24,ADL,adl,321,29.907,66,,FP,,,,0.994,2,158.1,94,144.8,0.183,320,0.166,0.12,0.543,,,"first alarm f73: angle (66 fr, |a| max 158°, first f73 a=-40°)",
+gmdcsa24_S02_adl_07,gmdcsa24,ADL,adl,388,29.846,0,,TN,,,,0.995,1,8.7,293,7.8,0.031,220,0.013,0.031,0.995,,,,
+gmdcsa24_S02_adl_08,gmdcsa24,ADL,adl,408,29.854,182,,FP,,,,0.995,1,116.2,263,110.9,0.068,297,0.327,0.045,0.539,,,"first alarm f34: angle (182 fr, |a| max 116°, first f34 a=+35°)",
+gmdcsa24_S02_adl_09,gmdcsa24,ADL,adl,327,29.818,35,,FP,,,,0.994,1,78.3,120,18.1,0.663,179,0.166,0.564,0.655,0.065,,"first alarm f111: angle (23 fr, |a| max 78°, first f111 a=+38°) + sink+still (12 fr, sink max 0.56, first f150 s=0.42)",
+gmdcsa24_S02_adl_10,gmdcsa24,ADL,adl,226,29.868,16,,FP,,,,0.991,1,80.1,8,13.2,0.042,217,0.035,0.042,0.482,,,"first alarm f2: angle (16 fr, |a| max 80°, first f2 a=+54°)",
+gmdcsa24_S02_adl_11,gmdcsa24,ADL,adl,298,29.9,0,,TN,,,,0.993,2,17.2,117,8.4,0.055,71,0.015,0.055,0.774,,,,
+gmdcsa24_S02_adl_12,gmdcsa24,ADL,adl,227,29.868,212,,FP,,,,0.991,1,70.7,94,57.9,0.512,132,0.131,0.506,0.698,0.027,,"first alarm f7: angle (200 fr, |a| max 71°, first f7 a=+36°) + sink+still (21 fr, sink max 0.51, first f126 s=0.48)",
+gmdcsa24_S02_adl_13,gmdcsa24,ADL,adl,145,29.795,39,,FP,,,,0.986,1,125.8,28,33.7,0.875,87,0.086,0.875,0.378,0.038,,"first alarm f23: angle (14 fr, |a| max 126°, first f23 a=+42°) + sink+still (25 fr, sink max 0.88, first f63 s=0.53)",
+gmdcsa24_S02_adl_14,gmdcsa24,ADL,adl,166,14.985,12,,FP,,,,0.982,2,41.4,68,29.5,0.309,97,0.133,0.244,0.485,,,"first alarm f67: angle (12 fr, |a| max 41°, first f67 a=+35°)",
+gmdcsa24_S02_adl_15,gmdcsa24,ADL,adl,179,14.985,12,,FP,,,,0.983,2,46.9,13,26.8,0.201,107,0.078,0.201,0.608,,,"first alarm f7: angle (12 fr, |a| max 47°, first f7 a=+36°)",
+gmdcsa24_S02_adl_16,gmdcsa24,ADL,adl,173,14.985,171,,FP,,,,0.988,1,94.8,156,88.6,0.226,164,0.088,0.226,0.848,,,"first alarm f2: angle (171 fr, |a| max 95°, first f2 a=+61°)",
+gmdcsa24_S02_adl_17,gmdcsa24,ADL,adl,175,14.985,12,,FP,,,,0.989,2,85.7,2,20.9,0.17,9,0.148,0.105,0.653,,,"first alarm f2: angle (12 fr, |a| max 86°, first f2 a=+86°)",
+gmdcsa24_S02_adl_18,gmdcsa24,ADL,adl,175,14.985,0,,TN,,,,0.983,2,14.4,159,11.9,0.034,173,0.024,0.034,0.919,,,,
+gmdcsa24_S02_adl_19,gmdcsa24,ADL,adl,170,14.985,102,,FP,,,,0.988,1,79.8,19,42.6,0.842,46,0.167,0.675,0.673,0.09,,"first alarm f12: angle (101 fr, |a| max 80°, first f12 a=-38°) + sink+still (1 fr, sink max 0.68, first f35 s=0.68)",
+gmdcsa24_S02_adl_20,gmdcsa24,ADL,adl,175,14.985,40,,FP,,,,0.983,2,149.4,61,68.9,0.892,86,0.212,0.678,0.458,0.08,,"first alarm f2: angle (38 fr, |a| max 149°, first f2 a=-57°) + sink+still (2 fr, sink max 0.68, first f82 s=0.62)",
+gmdcsa24_S02_adl_21,gmdcsa24,ADL,adl,158,14.985,40,,FP,,,,0.981,2,113.8,45,107.4,0.053,62,0.319,0.042,0.632,,,"first alarm f22: angle (40 fr, |a| max 114°, first f22 a=+37°)",
+gmdcsa24_S02_adl_22,gmdcsa24,ADL,adl,182,14.985,156,,FP,,,,0.989,1,114.3,4,99.7,0.605,57,0.042,0.605,0.617,0.023,,"first alarm f2: angle (156 fr, |a| max 114°, first f2 a=+113°) + sink+still (13 fr, sink max 0.61, first f49 s=0.54)",
+gmdcsa24_S02_adl_23,gmdcsa24,ADL,adl,109,14.985,0,,TN,,,,0.982,1,14.1,2,5.7,0.036,19,0.049,0.036,0.944,,,,
+gmdcsa24_S03_fall_01,gmdcsa24,Fall,fall,114,30.0,107,,TP,,,angle,0.982,1,117.1,14,111.0,0.986,44,0.227,0.979,0.571,0.013,,,0.06
+gmdcsa24_S03_fall_02,gmdcsa24,Fall,fall,196,29.848,92,,TP,,,angle,0.939,1,64.3,96,56.5,0.311,155,0.056,0.311,0.734,,,,0.47
+gmdcsa24_S03_fall_03,gmdcsa24,Fall,fall,167,29.821,96,,TP,,,angle,0.988,1,86.1,107,84.2,0.676,66,0.58,0.669,0.691,0.013,,,0.43
+gmdcsa24_S03_fall_04,gmdcsa24,Fall,fall,163,29.817,113,,TP,,,angle,0.988,2,117.0,72,108.2,0.665,102,0.016,0.665,0.506,0.015,,,0.25
+gmdcsa24_S03_fall_05,gmdcsa24,Fall,fall,300,29.801,191,,TP,,,angle,0.993,1,106.0,276,101.6,0.61,161,0.042,0.61,0.829,0.036,,,0.34
+gmdcsa24_S03_fall_06,gmdcsa24,Fall,fall,166,29.82,162,,TP,,,angle,0.988,1,103.7,38,98.4,0.084,58,0.026,0.084,0.835,,,,0.02
+gmdcsa24_S03_fall_07,gmdcsa24,Fall,fall,269,29.889,221,,TP,,,angle,0.993,1,99.3,76,94.9,0.549,82,0.05,0.549,0.843,0.025,,,0.16
+gmdcsa24_S03_fall_08,gmdcsa24,Fall,fall,186,28.912,184,,TP,,,angle,0.989,1,111.7,58,106.0,0.968,67,0.085,0.968,0.745,0.054,,,0.01
+gmdcsa24_S03_fall_09,gmdcsa24,Fall,fall,186,29.84,83,,TP,,,angle,0.989,1,122.2,130,119.5,0.088,154,0.051,0.088,0.793,,,,0.55
+gmdcsa24_S03_fall_10,gmdcsa24,Fall,fall,131,29.773,126,,TP,,,angle,0.985,1,90.6,58,86.6,0.333,124,0.008,0.333,0.589,,,,0.04
+gmdcsa24_S03_fall_11,gmdcsa24,Fall,fall,267,29.888,127,,TP,,,angle,0.993,1,84.7,257,83.7,0.528,235,0.01,0.528,0.736,0.006,,,0.39
+gmdcsa24_S03_fall_12,gmdcsa24,Fall,fall,127,30.0,106,,TP,,,angle,0.984,1,106.4,114,104.8,0.948,80,0.291,0.835,0.328,0.017,,,0.02
+gmdcsa24_S03_fall_13,gmdcsa24,Fall,fall,121,29.754,81,,TP,,,angle,0.983,1,107.9,62,106.0,0.088,71,0.038,0.088,0.748,,,,0.33
+gmdcsa24_S03_fall_14,gmdcsa24,Fall,fall,367,29.837,106,,TP,,,angle,0.935,2,157.8,286,152.2,0.644,270,0.718,0.623,0.507,0.036,,,0.67
+gmdcsa24_S03_fall_15,gmdcsa24,Fall,fall,85,14.985,42,,TP,,,angle,0.906,1,167.5,43,162.4,0.651,58,0.097,0.651,0.727,0.049,,,0.39
+gmdcsa24_S03_fall_16,gmdcsa24,Fall,fall,91,14.985,55,,TP,,,angle,0.945,1,99.4,38,83.2,0.576,35,1.08,0.449,0.442,0.087,,,0.33
+gmdcsa24_S03_fall_17,gmdcsa24,Fall,fall,128,14.985,105,,TP,,,angle,0.984,1,106.8,46,95.7,0.084,26,0.307,0.064,0.46,,,,0.18
+gmdcsa24_S03_fall_18,gmdcsa24,Fall,fall,178,14.985,104,,TP,,,angle,0.949,1,178.7,91,170.9,1.185,88,0.624,0.455,0.751,0.081,,,0.37
+gmdcsa24_S03_fall_19,gmdcsa24,Fall,fall,86,14.985,39,,TP,,,angle,0.884,2,166.3,59,161.3,0.883,51,0.643,0.08,0.684,0.317,,,0.37
+gmdcsa24_S03_fall_20,gmdcsa24,Fall,fall,94,14.985,59,,TP,,,angle,0.979,1,94.5,41,72.7,0.67,69,0.012,0.67,0.685,0.012,,,0.37
+gmdcsa24_S03_fall_21,gmdcsa24,Fall,fall,274,29.891,104,,TP,,,angle,0.993,1,104.7,191,97.1,0.674,226,0.029,0.674,0.838,0.024,,,0.59
+gmdcsa24_S03_adl_01,gmdcsa24,ADL,adl,261,29.772,0,,TN,,,,0.992,1,6.5,80,5.0,0.073,172,0.054,0.073,0.992,,,,
+gmdcsa24_S03_adl_02,gmdcsa24,ADL,adl,273,29.891,0,,TN,,,,0.993,1,4.0,103,3.0,0.039,168,0.044,0.039,0.993,,,,
+gmdcsa24_S03_adl_03,gmdcsa24,ADL,adl,296,29.799,63,,FP,,,,0.993,1,91.4,7,71.1,0.122,28,0.063,0.122,0.507,,,"first alarm f2: angle (63 fr, |a| max 91°, first f2 a=-90°)",
+gmdcsa24_S03_adl_04,gmdcsa24,ADL,adl,300,29.9,92,,FP,,,,0.99,4,100.9,51,98.7,0.179,299,0.166,0.09,0.578,,,"first alarm f15: angle (92 fr, |a| max 101°, first f15 a=+35°)",
+gmdcsa24_S03_adl_05,gmdcsa24,ADL,adl,154,29.806,70,,FP,,,,0.981,3,100.1,91,92.6,0.021,58,0.266,0.021,0.309,,,"first alarm f2: angle (70 fr, |a| max 100°, first f2 a=+100°)",
+gmdcsa24_S03_adl_06,gmdcsa24,ADL,adl,267,29.888,168,,FP,,,,0.993,1,112.3,6,105.5,0.828,192,0.351,0.82,0.374,0.055,,"first alarm f2: angle (156 fr, |a| max 112°, first f2 a=+110°) + sink+still (12 fr, sink max 0.82, first f201 s=0.82)",
+gmdcsa24_S03_adl_07,gmdcsa24,ADL,adl,100,30.0,0,,TN,,,,0.98,1,4.2,86,2.2,0.363,83,0.782,0.046,0.184,,,,
+gmdcsa24_S03_adl_08,gmdcsa24,ADL,adl,146,29.796,128,,FP,,,,0.986,1,104.7,136,103.5,0.089,78,0.021,0.089,0.715,,,"first alarm f18: angle (128 fr, |a| max 105°, first f18 a=+36°)",
+gmdcsa24_S03_adl_09,gmdcsa24,ADL,adl,232,29.871,101,,FP,,,,0.991,1,99.5,3,96.4,0.086,112,0.096,0.086,0.596,,,"first alarm f2: angle (101 fr, |a| max 99°, first f2 a=+99°)",
+gmdcsa24_S03_adl_10,gmdcsa24,ADL,adl,371,29.839,0,,TN,,,,0.995,1,4.8,366,2.0,0.029,82,0.035,0.029,0.995,,,,
+gmdcsa24_S03_adl_11,gmdcsa24,ADL,adl,361,29.835,0,,TN,,,,0.994,1,12.2,351,7.4,0.046,325,0.024,0.046,0.783,,,,
+gmdcsa24_S03_adl_12,gmdcsa24,ADL,adl,160,14.985,4,,FP,,,,0.988,2,41.9,123,22.6,0.231,14,0.402,0.218,0.623,,,"first alarm f121: angle (4 fr, |a| max 42°, first f121 a=-35°)",
+gmdcsa24_S03_adl_13,gmdcsa24,ADL,adl,130,14.985,15,,FP,,,,0.985,1,67.6,2,33.2,0.747,18,0.46,0.718,0.609,0.08,,"first alarm f2: angle (12 fr, |a| max 68°, first f2 a=+68°) + sink+still (3 fr, sink max 0.72, first f23 s=0.72)",
+gmdcsa24_S03_adl_14,gmdcsa24,ADL,adl,133,14.985,15,,FP,,,,0.985,1,90.2,6,21.5,0.835,24,0.106,0.833,0.771,0.061,,"first alarm f2: angle (7 fr, |a| max 90°, first f2 a=-80°) + sink+still (8 fr, sink max 0.83, first f27 s=0.82)",
+gmdcsa24_S03_adl_15,gmdcsa24,ADL,adl,115,14.985,0,,TN,,,,0.983,1,32.0,45,28.4,0.046,52,0.046,0.046,0.982,,,,
+gmdcsa24_S03_adl_16,gmdcsa24,ADL,adl,306,29.805,0,,TN,,,,0.993,1,3.8,176,2.6,0.02,213,0.012,0.02,0.993,,,,
+gmdcsa24_S03_adl_17,gmdcsa24,ADL,adl,182,14.985,0,,TN,,,,0.989,1,9.8,51,8.4,0.035,44,0.017,0.035,0.989,,,,
+gmdcsa24_S03_adl_18,gmdcsa24,ADL,adl,167,14.985,0,,TN,,,,0.988,2,34.7,13,9.3,0.18,20,0.164,0.172,0.844,,,,
+gmdcsa24_S03_adl_19,gmdcsa24,ADL,adl,98,14.985,19,,FP,,,,0.98,1,111.9,11,91.6,0.156,8,0.464,0.111,0.396,,,"first alarm f2: angle (19 fr, |a| max 112°, first f2 a=+71°)",
+gmdcsa24_S03_adl_20,gmdcsa24,ADL,adl,141,14.985,0,,TN,,,,0.986,1,5.7,84,5.2,0.02,20,0.01,0.02,0.986,,,,
+gmdcsa24_S03_adl_21,gmdcsa24,ADL,adl,305,29.805,33,,FP,,,,0.993,1,50.3,258,36.8,0.055,288,0.177,0.041,0.809,,,"first alarm f244: angle (33 fr, |a| max 50°, first f244 a=+35°)",
+gmdcsa24_S03_adl_22,gmdcsa24,ADL,adl,283,29.894,0,,TN,,,,0.993,1,20.6,4,19.6,0.023,29,0.02,0.023,0.993,,,,
+gmdcsa24_S04_fall_01,gmdcsa24,Fall,fall,139,29.786,81,,TP,,,angle,0.986,1,92.2,75,87.6,0.592,69,0.868,0.569,0.701,0.017,,,0.42
+gmdcsa24_S04_fall_02,gmdcsa24,Fall,fall,89,30.0,87,,TP,,,angle,0.978,1,88.7,4,86.8,1.291,83,0.049,1.291,0.701,0.049,,,0.02
+gmdcsa24_S04_fall_03,gmdcsa24,Fall,fall,200,29.851,141,,TP,,,angle,0.735,1,135.0,61,58.4,0.953,118,0.032,0.953,0.694,0.029,,,0.28
+gmdcsa24_S04_fall_04,gmdcsa24,Fall,fall,141,29.789,106,,TP,,,angle,0.801,3,104.0,99,103.3,0.792,101,0.02,0.792,0.638,0.016,,,0.25
+gmdcsa24_S04_fall_05,gmdcsa24,Fall,fall,221,29.865,144,,TP,,,angle,0.991,1,95.4,98,93.6,0.067,110,0.057,0.067,0.849,,,,0.35
+gmdcsa24_S04_fall_06,gmdcsa24,Fall,fall,183,29.837,156,,TP,,,angle,0.989,1,107.2,89,97.7,0.959,127,0.081,0.959,0.646,0.026,,,0.15
+gmdcsa24_S04_fall_07,gmdcsa24,Fall,fall,188,29.841,148,,TP,,,angle,0.989,1,109.7,84,98.8,0.784,121,0.027,0.784,0.511,0.018,,,0.21
+gmdcsa24_S04_fall_08,gmdcsa24,Fall,fall,187,29.84,122,,TP,,,angle,0.989,1,105.3,133,95.8,0.052,96,0.067,0.052,0.714,,,,0.35
+gmdcsa24_S04_fall_09,gmdcsa24,Fall,fall,181,29.835,17,,TP,,,angle,0.508,1,90.1,88,61.0,0.059,74,0.299,0.012,0.685,,,,0.4
+gmdcsa24_S04_fall_10,gmdcsa24,Fall,fall,151,29.803,104,,TP,,,angle,0.987,1,102.6,79,91.7,0.653,136,0.03,0.653,0.644,0.021,,,0.31
+gmdcsa24_S04_fall_11,gmdcsa24,Fall,fall,136,29.781,90,,TP,,,angle,0.941,2,103.0,50,90.8,0.979,110,0.087,0.979,0.484,0.063,,,0.29
+gmdcsa24_S04_fall_12,gmdcsa24,Fall,fall,138,29.784,88,,TP,,,angle,0.986,1,179.8,89,178.6,0.924,71,1.491,0.657,0.485,0.061,,,0.36
+gmdcsa24_S04_fall_13,gmdcsa24,Fall,fall,149,29.8,142,,TP,,,angle,0.987,1,95.7,23,93.8,0.057,29,0.207,0.045,0.796,,,,0.05
+gmdcsa24_S04_fall_14,gmdcsa24,Fall,fall,157,29.81,131,,TP,,,angle,0.987,1,105.4,72,96.4,0.979,91,0.436,0.953,0.535,0.037,,,0.14
+gmdcsa24_S04_fall_15,gmdcsa24,Fall,fall,145,29.795,89,,TP,,,angle,0.986,1,177.6,82,167.9,0.975,76,0.898,0.842,0.636,0.042,,,0.39
+gmdcsa24_S04_fall_16,gmdcsa24,Fall,fall,212,29.859,111,,TP,,,angle,0.575,1,159.9,108,87.6,0.673,163,0.018,0.673,0.639,0.014,,,0.48
+gmdcsa24_S04_fall_17,gmdcsa24,Fall,fall,207,29.856,125,,TP,,,angle,0.99,1,89.9,103,85.9,0.124,151,0.015,0.124,0.839,,,,0.4
+gmdcsa24_S04_adl_01,gmdcsa24,ADL,adl,370,29.839,0,,TN,,,,0.995,1,19.1,135,8.0,0.032,154,0.043,0.032,0.995,,,,
+gmdcsa24_S04_adl_02,gmdcsa24,ADL,adl,315,29.811,0,,TN,,,,0.994,1,8.0,2,5.3,0.052,110,0.061,0.052,0.853,,,,
+gmdcsa24_S04_adl_03,gmdcsa24,ADL,adl,267,29.888,19,,FP,,,,0.993,1,41.1,50,27.7,0.07,140,0.039,0.07,0.725,,,"first alarm f41: angle (19 fr, |a| max 41°, first f41 a=-37°)",
+gmdcsa24_S04_adl_04,gmdcsa24,ADL,adl,388,29.846,0,,TN,,,,0.995,1,32.2,21,27.9,0.043,52,0.028,0.043,0.992,,,,
+gmdcsa24_S04_adl_05,gmdcsa24,ADL,adl,220,29.864,94,,FP,,,,0.791,3,172.4,148,155.4,0.729,175,0.446,0.225,0.12,0.229,,"first alarm f73: angle (94 fr, |a| max 172°, first f73 a=-49°)",
+gmdcsa24_S04_adl_06,gmdcsa24,ADL,adl,196,29.848,173,,FP,,,,0.99,1,115.8,50,106.8,0.683,110,0.24,0.542,0.268,0.081,,"first alarm f23: angle (173 fr, |a| max 116°, first f23 a=+37°) + sink+still (3 fr, sink max 0.54, first f118 s=0.53)",
+gmdcsa24_S04_adl_07,gmdcsa24,ADL,adl,149,29.8,147,,FP,,,,0.987,1,116.8,9,106.4,0.719,49,0.198,0.405,0.082,0.084,,"first alarm f2: angle (147 fr, |a| max 117°, first f2 a=-100°) + sink+still (1 fr, sink max 0.41, first f79 s=0.41)",
+gmdcsa24_S04_adl_08,gmdcsa24,ADL,adl,368,29.838,86,,FP,,,,0.995,1,89.2,2,58.0,0.078,36,0.113,0.064,0.828,,,"first alarm f2: angle (86 fr, |a| max 89°, first f2 a=-89°)",
+gmdcsa24_S04_adl_09,gmdcsa24,ADL,adl,362,29.917,0,,TN,,,,0.994,1,5.1,152,3.3,0.097,265,0.097,0.097,0.994,,,,
+gmdcsa24_S04_adl_10,gmdcsa24,ADL,adl,382,29.844,252,,FP,,,,0.995,2,97.9,253,91.1,0.322,107,0.07,0.322,0.698,,,"first alarm f130: angle (256 fr, |a| max 98°, first f130 a=-36°)",
+gmdcsa24_S04_adl_11,gmdcsa24,ADL,adl,320,29.907,0,,TN,,,,0.994,1,11.9,250,10.4,0.103,52,0.061,0.103,0.994,,,,
+gmdcsa24_S04_adl_12,gmdcsa24,ADL,adl,257,29.884,0,,TN,,,,0.992,1,17.7,50,11.2,0.083,65,0.067,0.083,0.992,,,,
+gmdcsa24_S04_adl_13,gmdcsa24,ADL,adl,164,29.818,0,,TN,,,,0.988,1,12.6,60,12.1,0.02,136,0.011,0.02,0.988,,,,
+gmdcsa24_S04_adl_14,gmdcsa24,ADL,adl,248,29.88,52,,FP,,,,0.992,1,72.0,92,53.0,0.042,124,0.163,0.033,0.675,,,"first alarm f2: angle (52 fr, |a| max 72°, first f2 a=-54°)",
+gmdcsa24_S04_adl_15,gmdcsa24,ADL,adl,159,29.812,147,,FP,,,,0.987,1,90.3,70,85.7,0.121,81,0.058,0.121,0.822,,,"first alarm f12: angle (147 fr, |a| max 90°, first f12 a=-35°)",
+gmdcsa24_S04_adl_16,gmdcsa24,ADL,adl,213,29.86,139,,FP,,,,0.991,1,91.5,128,88.3,0.194,32,0.092,0.194,0.697,,,"first alarm f74: angle (139 fr, |a| max 91°, first f74 a=-35°)",
+gmdcsa24_S04_adl_17,gmdcsa24,ADL,adl,186,29.84,48,,FP,,,,0.898,1,107.7,65,98.7,0.063,148,0.149,0.055,0.192,,,"first alarm f51: angle (48 fr, |a| max 108°, first f51 a=-37°)",
+gmdcsa24_S04_adl_18,gmdcsa24,ADL,adl,421,29.858,0,,TN,,,,0.995,1,33.2,22,12.8,0.197,34,0.216,0.197,0.89,,,,
+gmdcsa24_S04_adl_19,gmdcsa24,ADL,adl,296,29.899,53,,FP,,,,0.993,1,94.2,64,78.4,0.178,236,0.04,0.178,0.633,,,"first alarm f43: angle (53 fr, |a| max 94°, first f43 a=+40°)",
+gmdcsa24_S04_adl_20,gmdcsa24,ADL,adl,523,29.829,99,,FP,,,,0.996,1,96.9,29,55.5,0.269,88,0.235,0.25,0.741,,,"first alarm f2: angle (99 fr, |a| max 97°, first f2 a=-39°)",

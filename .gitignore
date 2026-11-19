@@ -1,0 +1,23 @@
+# environments / build
+.venv/
+.venv-*/
+__pycache__/
+*.egg-info/
+
+# datasets (rebuild: see data/README.md); data/pose/compare.json is kept
+data/raw/
+data/videos/
+data/pose/*/
+data/logs/
+
+# regenerable outputs
+results/*/videos/
+results/*/*.parquet
+*.log
+
+# reference videos (not for the repo)
+sample_result/
+
+# webcam demo outputs (--record / --events)
+recordings/
+*.jsonl

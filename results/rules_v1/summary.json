@@ -1,0 +1,54 @@
+{
+  "pose": "rtmo_t0.3_dedup",
+  "params": {
+    "angle_thr": 35.0,
+    "sink_thr": 0.4,
+    "kp_thr": 0.3,
+    "sink_window_s": 2.0,
+    "still_window_s": 0.5,
+    "still_tol": 0.1,
+    "still_min_frames": 3
+  },
+  "tolerance_s": 0.5,
+  "caucafall": {
+    "falls": 50,
+    "TP": 49,
+    "FN": 1,
+    "adl": 50,
+    "FP": 40,
+    "TN": 10,
+    "recall": 0.98,
+    "fp_rate": 0.8,
+    "first_rule": {
+      "angle": 49
+    },
+    "latency_s_median": -0.4,
+    "latency_s_max": 0.8,
+    "fall_clips_with_early_alarm": 30,
+    "fp_by_activity": {
+      "Kneel": 10,
+      "Sit down": 10,
+      "Pick up object": 9,
+      "Walk": 9,
+      "Hop": 2
+    }
+  },
+  "gmdcsa24": {
+    "falls": 79,
+    "TP": 78,
+    "FN": 1,
+    "adl": 81,
+    "FP": 53,
+    "TN": 28,
+    "recall": 0.987,
+    "fp_rate": 0.654,
+    "first_rule": {
+      "angle": 77,
+      "sink+still": 1
+    },
+    "fall_clips_with_early_alarm": 0,
+    "fp_by_activity": {
+      "ADL": 53
+    }
+  }
+}
