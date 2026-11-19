@@ -88,13 +88,17 @@ See [data/README.md](data/README.md).
 Or with make: `make webcam` (CPU), `make webcam-gpu`, `make webcam CAM=1 ARGS="--no-flip"`.
 
 Keys: `q`/`Esc` quit, `r` reset tracks and alarms, `f` mirror. Options: `--source N|file`,
-`--no-flip` (the webcam is mirrored by default, files never), `--record out.mp4`, `--events events.jsonl` (one JSON line per fall), `--alarm-hold`
+`--no-flip` (the webcam is mirrored by default, files never), `--no-stitch`, `--record out.mp4`, `--events events.jsonl` (one JSON line per fall), `--alarm-hold`
 (banner seconds), `--model`, `--no-display`.
 
 - Runs the v2 rules (`results/rules_v2/REPORT.md`) through `falldet.rules.OnlineFallRuleV2`,
   a streaming version on wall-clock time. Fed a file's timestamps, it agrees with the batch
   v2 results on all 260 test videos: same alarm / no-alarm per clip, alarm-frame IoU median
   1.00, min 0.83.
+- Track stitching (`falldet.stitch`, on by default): when the tracker gives a person a new
+  id mid-fall, the new id keeps the old one's history (a track that vanished ≤ 1.5 s earlier
+  within 2 box sizes). +2 falls at the original frame rate, +6 at 10 fps, no new false
+  alarms (`results/rules_v2/REPORT.md`, `results/lowfps/REPORT.md`).
 - `--gpu` needs `.venv-gpu`. In `.venv-cpu` it exits with a message instead of silently
   running on CPU.
 - **Camera placement matters.** The rule needs the hips and knees/ankles in view, and was

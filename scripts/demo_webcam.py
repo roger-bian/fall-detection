@@ -38,6 +38,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from falldet.pose import MODELS, detect_and_track, make_backend, make_tracker  # noqa: E402
 from falldet.rules import OnlineFallRuleV2, RuleParamsV2  # noqa: E402
+from falldet.stitch import TrackStitcher  # noqa: E402
 from falldet.runtime import require_cuda_ep  # noqa: E402
 from falldet.viz import draw_alarm, draw_person, feature_label, rule_text, text  # noqa: E402
 
@@ -111,6 +112,9 @@ def main() -> int:
     ap.add_argument("--width", type=int, default=1280, help="requested camera width")
     ap.add_argument("--height", type=int, default=720, help="requested camera height")
     ap.add_argument("--display-width", type=int, default=960)
+    ap.add_argument("--no-stitch", action="store_true",
+                    help="use raw tracker ids (default: a person who gets a new tracker id "
+                         "mid-fall keeps their history, falldet.stitch)")
     ap.add_argument("--no-flip", action="store_true",
                     help="do not mirror the webcam image (webcam is mirrored by default; files never are)")
     ap.add_argument("--alarm-hold", type=float, default=5.0,
@@ -136,6 +140,7 @@ def main() -> int:
     tracker_update, _ = make_tracker(src_fps)
     params = RuleParamsV2()
     rule = OnlineFallRuleV2(params)
+    stitcher = None if args.no_stitch else TrackStitcher()
     reader = LatestFrame(cap) if live else None
     flip = live and not args.no_flip
     rtxt = rule_text(asdict(params))
@@ -172,7 +177,12 @@ def main() -> int:
             frame = cv2.flip(frame, 1)
 
         t0 = time.perf_counter()
+        # frame counting, not timestamps: at 10 fps, telling the tracker the wrong rate made
+        # no difference in frame-count mode but tripled ID restarts in timestamp mode
+        # (results/lowfps/REPORT.md)
         people = detect_and_track(net, tracker_update, frame)
+        if stitcher:
+            people = stitcher.update(t, people)
         ms = 1000 * (time.perf_counter() - t0)
         rule.tick(t)
 
@@ -230,6 +240,8 @@ def main() -> int:
             if key == ord("r"):
                 rule.reset()
                 tracker_update, _ = make_tracker(src_fps)
+                if stitcher:
+                    stitcher.reset()
                 falling.clear()
                 log.clear()
                 last_alarm_t = None

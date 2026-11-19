@@ -1,0 +1,67 @@
+{
+  "pose": "rtmo_10fps_trk30",
+  "manifest": "data/annotations/manifest_10fps.csv",
+  "fixed": true,
+  "stitch": false,
+  "params": {
+    "lie_thr": 50.0,
+    "lie_s": 1.0,
+    "lie_frac": 0.8,
+    "drop_thr": 0.25,
+    "desc_s": 3.0,
+    "rot_thr": 110.0,
+    "rot_dt_s": 0.25,
+    "rot_pre_s": 1.5,
+    "kp_thr": 0.3
+  },
+  "tune/caucafall": {
+    "falls": 50,
+    "TP": 42,
+    "recall": 0.84,
+    "adl": 50,
+    "FP": 1,
+    "fp_rate": 0.02,
+    "fired_by": {
+      "drop+rot": 36,
+      "drop": 5,
+      "rot": 1
+    },
+    "latency_s_median": 0.8500000000000001,
+    "early_alarm_clips": 0,
+    "fp_by_activity": {
+      "Kneel": 1
+    }
+  },
+  "tune/gmdcsa24_S1-2": {
+    "falls": 41,
+    "TP": 36,
+    "recall": 0.878,
+    "adl": 39,
+    "FP": 2,
+    "fp_rate": 0.051,
+    "fired_by": {
+      "drop+rot": 28,
+      "drop": 6,
+      "rot": 2
+    },
+    "fp_by_activity": {
+      "ADL": 2
+    }
+  },
+  "test/gmdcsa24_S3-4": {
+    "falls": 38,
+    "TP": 30,
+    "recall": 0.789,
+    "adl": 42,
+    "FP": 3,
+    "fp_rate": 0.071,
+    "fired_by": {
+      "drop+rot": 19,
+      "rot": 7,
+      "drop": 4
+    },
+    "fp_by_activity": {
+      "ADL": 3
+    }
+  }
+}

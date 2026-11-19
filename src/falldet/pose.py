@@ -194,22 +194,40 @@ def make_backend(model: str = "rtmo", device: str = "cuda", backend: str = "onnx
 
 
 def make_tracker(fps: float, activation: float = 0.35, min_frames: int = 3):
+    """ByteTrack. Returns (update, name); call update(detections, timestamp=None).
+
+    Without timestamps the tracker counts frames: a lost track survives `fps` frames and
+    the motion model steps once per frame, so `fps` must be the rate frames are actually
+    processed at. With timestamps (seconds, increasing) it uses real elapsed time
+    instead: a lost track survives 1 s and the motion model steps by the actual gap,
+    whatever the frame rate.
+
+    Prefer frame counting. On the test set at 10 fps (results/lowfps/REPORT.md), frame
+    counting gave identical tracks whether the tracker was told 10 or 30 fps (the
+    lost-track buffer length did not matter), while timestamps with fps=30 stretched every
+    motion prediction to 3 frame-steps and raised ID restarts in fall clips from 11 to 38.
+    Timestamps only behave when `fps` matches the real processing rate."""
     try:
         from trackers import ByteTrackTracker
 
         t = ByteTrackTracker(frame_rate=fps, track_activation_threshold=activation,
                              minimum_consecutive_frames=min_frames)
-        return t.update, "trackers.ByteTrackTracker"
+        return (lambda dets, timestamp=None: t.update(dets, timestamp=timestamp),
+                "trackers.ByteTrackTracker")
     except ImportError:
         t = sv.ByteTrack(frame_rate=round(fps), track_activation_threshold=activation,
                          minimum_consecutive_frames=min_frames)
-        return t.update_with_detections, "supervision.ByteTrack"
+        # supervision's ByteTrack has no timestamp support: frame counting only
+        return (lambda dets, timestamp=None: t.update_with_detections(dets),
+                "supervision.ByteTrack")
 
 
-def detect_and_track(net, tracker_update, frame: np.ndarray, upscale: float = 1.0) -> list[dict]:
+def detect_and_track(net, tracker_update, frame: np.ndarray, upscale: float = 1.0,
+                     timestamp: float | None = None) -> list[dict]:
     """Pose + tracking for one frame. Returns confirmed tracks only, as dicts with
     track_id, bbox_x/y/w/h (clamped to the frame), det_conf, kp17_xyc (17x3 float32,
-    native pixels) and kp_mean_conf. Shared by extract() and the live demo."""
+    native pixels) and kp_mean_conf. Shared by extract() and the live demo.
+    `timestamp` (seconds) switches the tracker to elapsed-time mode, see make_tracker."""
     height, width = frame.shape[:2]
     img = frame if upscale == 1.0 else cv2.resize(
         frame, None, fx=upscale, fy=upscale, interpolation=cv2.INTER_CUBIC)
@@ -221,7 +239,7 @@ def detect_and_track(net, tracker_update, frame: np.ndarray, upscale: float = 1.
         xyxy=xyxy.astype(np.float32), confidence=dscore.astype(np.float32),
         class_id=np.zeros(len(xyxy), int), data={"idx": np.arange(len(xyxy))},
     ) if len(xyxy) else sv.Detections.empty()
-    tracked = tracker_update(dets)
+    tracked = tracker_update(dets, timestamp=timestamp)
 
     out = []
     for j in range(len(tracked)):
@@ -243,10 +261,15 @@ def detect_and_track(net, tracker_update, frame: np.ndarray, upscale: float = 1.
     return out
 
 
-def extract(video: str, net, *, model: str, upscale: float = 1.0,
-            max_frames: int = 0) -> tuple[pd.DataFrame, dict]:
+def extract(video: str, net, *, model: str, upscale: float = 1.0, max_frames: int = 0,
+            timestamps: bool = False, tracker_fps: float | None = None
+            ) -> tuple[pd.DataFrame, dict]:
     """Run pose + tracking over one video. `net` is reused across videos;
-    the tracker is fresh per video so ids never leak between clips."""
+    the tracker is fresh per video so ids never leak between clips.
+
+    timestamps   feed the tracker frame index / fps as timestamps (elapsed-time mode)
+    tracker_fps  tell the tracker this frame rate instead of the file's (to reproduce a
+                 camera that reports one rate but delivers another)"""
     cap = cv2.VideoCapture(video)
     if not cap.isOpened():
         raise RuntimeError(f"cannot open {video}")
@@ -254,7 +277,7 @@ def extract(video: str, net, *, model: str, upscale: float = 1.0,
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = cap.get(cv2.CAP_PROP_FPS) or 25.0
     n_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    tracker_update, tracker_name = make_tracker(fps)
+    tracker_update, tracker_name = make_tracker(tracker_fps or fps)
 
     rows: list[dict] = []
     idx = 0
@@ -263,7 +286,8 @@ def extract(video: str, net, *, model: str, upscale: float = 1.0,
         ok, frame = cap.read()
         if not ok:
             break
-        for d in detect_and_track(net, tracker_update, frame, upscale):
+        ts = idx / fps if timestamps else None
+        for d in detect_and_track(net, tracker_update, frame, upscale, timestamp=ts):
             d["kp17_xyc"] = d["kp17_xyc"].reshape(-1).tolist()
             rows.append({"frame": idx, **d})
         idx += 1
@@ -281,6 +305,7 @@ def extract(video: str, net, *, model: str, upscale: float = 1.0,
         "video": os.path.abspath(video), "width": width, "height": height, "fps": fps,
         "frames_in_file": n_frames, "frames_processed": idx,
         "model": model, "upscale": upscale, "tracker": tracker_name,
+        "tracker_fps": tracker_fps or fps, "tracker_timestamps": timestamps,
         "keypoint_format": "coco17", "keypoint_names": list(COCO17_NAMES),
         "coordinate_space": "native_video_pixels",
         "rows": len(df), "tracks": int(df["track_id"].nunique()) if len(df) else 0,
@@ -300,6 +325,10 @@ def main() -> int:
     ap.add_argument("--det-score-thr", type=float, default=0.3)
     ap.add_argument("--max-frames", type=int, default=0)
     ap.add_argument("--overwrite", action="store_true")
+    ap.add_argument("--tracker-timestamps", action="store_true",
+                    help="drive the tracker by timestamps (frame / fps) instead of frame counts")
+    ap.add_argument("--tracker-fps", type=float,
+                    help="frame rate to tell the tracker (default: the file's)")
     args = ap.parse_args()
 
     net = make_backend(args.model, args.device, det_score_thr=args.det_score_thr)
@@ -314,7 +343,8 @@ def main() -> int:
             print(f"[{i}/{len(args.videos)}] skip {name} (exists)", flush=True)
             continue
         df, meta = extract(video, net, model=args.model, upscale=args.upscale,
-                           max_frames=args.max_frames)
+                           max_frames=args.max_frames, timestamps=args.tracker_timestamps,
+                           tracker_fps=args.tracker_fps)
         df.to_parquet(f"{out}.tracks.parquet", index=False)
         with open(f"{out}.meta.json", "w") as fh:
             json.dump(meta, fh, indent=2)

@@ -7,12 +7,13 @@ __pycache__/
 # datasets (rebuild: see data/README.md); data/pose/compare.json is kept
 data/raw/
 data/videos/
+data/videos_*/
 data/pose/*/
 data/logs/
 
 # regenerable outputs
 results/*/videos/
-results/*/*.parquet
+results/**/*.parquet
 *.log
 
 # reference videos (not for the repo)

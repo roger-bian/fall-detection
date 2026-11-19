@@ -30,6 +30,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from falldet.rules import RuleParamsV2, compute_features_v2  # noqa: E402
+from falldet.stitch import stitch_tracks  # noqa: E402
 
 TOL_S = 0.5
 DROP_GRID = [0.15, 0.20, 0.25, 0.30, 0.35, 0.40, np.inf]
@@ -105,30 +106,42 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pose", default="rtmo_t0.3_dedup")
     ap.add_argument("--out", default="results/rules_v2")
+    ap.add_argument("--manifest", default="data/annotations/manifest.csv")
+    ap.add_argument("--fixed", action="store_true",
+                    help="no grid search: score with the RuleParamsV2 defaults (the tuned v2 "
+                         "thresholds), e.g. to compare pose / frame-rate variants")
+    ap.add_argument("--no-stitch", dest="stitch", action="store_false",
+                    help="score raw tracker ids (default: stitch ids with falldet.stitch, so "
+                         "a person who gets a new tracker id keeps their history)")
     args = ap.parse_args()
     out = ROOT / args.out
     out.mkdir(parents=True, exist_ok=True)
     p = RuleParamsV2()
 
-    man = list(csv.DictReader(open(ROOT / "data/annotations/manifest.csv")))
+    man = list(csv.DictReader(open(ROOT / args.manifest)))
     feats = {}
     for r in man:
         base = ROOT / "data/pose" / args.pose / r["video_id"]
         meta = json.load(open(f"{base}.meta.json"))
         t = pd.read_parquet(f"{base}.tracks.parquet") if meta["rows"] else pd.DataFrame()
+        if args.stitch and len(t):
+            t = stitch_tracks(t, float(r["fps"]))
         feats[r["video_id"]] = compute_features_v2(t, float(r["fps"]), p)
 
-    tune = [r for r in man if split_of(r) == "tune"]
-    grid = []
-    for d, rot in itertools.product(DROP_GRID, ROT_GRID):
-        m = metrics(score(tune, feats, d, rot))
-        grid.append({"drop_thr": d, "rot_thr": rot, **m, "j": m["recall"] - m["fp_rate"]})
-    g = pd.DataFrame(grid).sort_values(["j", "recall"], ascending=False)
-    g.to_csv(out / "grid_tune.csv", index=False)
-    best = g.iloc[0]
-    d, rot = float(best.drop_thr), float(best.rot_thr)
-    p = replace(p, drop_thr=d, rot_thr=rot)
-    print("top of tune grid:\n", g.head(6).to_string(index=False))
+    if args.fixed:
+        d, rot = p.drop_thr, p.rot_thr
+    else:
+        tune = [r for r in man if split_of(r) == "tune"]
+        grid = []
+        for d, rot in itertools.product(DROP_GRID, ROT_GRID):
+            m = metrics(score(tune, feats, d, rot))
+            grid.append({"drop_thr": d, "rot_thr": rot, **m, "j": m["recall"] - m["fp_rate"]})
+        g = pd.DataFrame(grid).sort_values(["j", "recall"], ascending=False)
+        g.to_csv(out / "grid_tune.csv", index=False)
+        best = g.iloc[0]
+        d, rot = float(best.drop_thr), float(best.rot_thr)
+        p = replace(p, drop_thr=d, rot_thr=rot)
+        print("top of tune grid:\n", g.head(6).to_string(index=False))
 
     df = score(man, feats, d, rot)
     df["why"] = [why(r, p, d, rot) for r in df.itertuples()]
@@ -136,7 +149,9 @@ def main() -> int:
     pd.concat([f.assign(video_id=v) for v, f in feats.items() if len(f)],
               ignore_index=True).to_parquet(out / "frame_features.parquet", index=False)
 
-    summary = {"pose": args.pose, "params": p.as_dict()}
+    summary = {"pose": args.pose, "manifest": args.manifest, "fixed": args.fixed,
+               "stitch": args.stitch,
+               "params": p.as_dict()}
     for name, sel in [("tune/caucafall", (df.split == "tune") & (df.dataset == "caucafall")),
                       ("tune/gmdcsa24_S1-2", (df.split == "tune") & (df.dataset == "gmdcsa24")),
                       ("test/gmdcsa24_S3-4", df.split == "test")]:

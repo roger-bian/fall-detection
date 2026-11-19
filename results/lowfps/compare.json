@@ -1,0 +1,118 @@
+{
+  "table": [
+    {
+      "config": "rtmo_t0.3_dedup",
+      "desc": "original fps, frame counting",
+      "fall_clips_one_id": "123/129",
+      "restarts_fall": 16,
+      "restarts_adl": 11,
+      "tracks_per_clip": 1.2,
+      "CAUCAFall": "43/50 TP, 1/50 FP",
+      "GMDCSA24 S1-2": "37/41 TP, 1/39 FP",
+      "GMDCSA24 S3-4": "31/38 TP, 3/42 FP"
+    },
+    {
+      "config": "rtmo_ts",
+      "desc": "original fps, timestamps",
+      "fall_clips_one_id": "123/129",
+      "restarts_fall": 16,
+      "restarts_adl": 11,
+      "tracks_per_clip": 1.2,
+      "CAUCAFall": "43/50 TP, 1/50 FP",
+      "GMDCSA24 S1-2": "37/41 TP, 1/39 FP",
+      "GMDCSA24 S3-4": "31/38 TP, 3/42 FP"
+    },
+    {
+      "config": "rtmo_10fps",
+      "desc": "10 fps, tracker told 10",
+      "fall_clips_one_id": "127/129",
+      "restarts_fall": 11,
+      "restarts_adl": 11,
+      "tracks_per_clip": 1.12,
+      "CAUCAFall": "42/50 TP, 1/50 FP",
+      "GMDCSA24 S1-2": "36/41 TP, 2/39 FP",
+      "GMDCSA24 S3-4": "30/38 TP, 3/42 FP"
+    },
+    {
+      "config": "rtmo_10fps_trk30",
+      "desc": "10 fps, tracker told 30",
+      "fall_clips_one_id": "127/129",
+      "restarts_fall": 11,
+      "restarts_adl": 11,
+      "tracks_per_clip": 1.12,
+      "CAUCAFall": "42/50 TP, 1/50 FP",
+      "GMDCSA24 S1-2": "36/41 TP, 2/39 FP",
+      "GMDCSA24 S3-4": "30/38 TP, 3/42 FP"
+    },
+    {
+      "config": "rtmo_10fps_trk30_ts",
+      "desc": "10 fps, tracker told 30 + timestamps",
+      "fall_clips_one_id": "119/129",
+      "restarts_fall": 38,
+      "restarts_adl": 13,
+      "tracks_per_clip": 1.23,
+      "CAUCAFall": "42/50 TP, 1/50 FP",
+      "GMDCSA24 S1-2": "35/41 TP, 2/39 FP",
+      "GMDCSA24 S3-4": "27/38 TP, 3/42 FP"
+    },
+    {
+      "config": "rtmo_t0.3_dedup+stitch",
+      "desc": "original fps + stitching",
+      "fall_clips_one_id": "124/129",
+      "restarts_fall": 6,
+      "restarts_adl": 4,
+      "tracks_per_clip": 1.13,
+      "CAUCAFall": "44/50 TP, 1/50 FP",
+      "GMDCSA24 S1-2": "37/41 TP, 1/39 FP",
+      "GMDCSA24 S3-4": "32/38 TP, 3/42 FP"
+    },
+    {
+      "config": "rtmo_10fps+stitch",
+      "desc": "10 fps + stitching",
+      "fall_clips_one_id": "127/129",
+      "restarts_fall": 1,
+      "restarts_adl": 4,
+      "tracks_per_clip": 1.05,
+      "CAUCAFall": "44/50 TP, 1/50 FP",
+      "GMDCSA24 S1-2": "38/41 TP, 2/39 FP",
+      "GMDCSA24 S3-4": "32/38 TP, 3/42 FP"
+    }
+  ],
+  "changed_vs_original": {
+    "rtmo_ts vs rtmo_t0.3_dedup": {},
+    "rtmo_10fps vs rtmo_t0.3_dedup": {
+      "caucafall_S08_fall_forward": "TP -> FN",
+      "gmdcsa24_S02_fall_03": "TP -> FN",
+      "gmdcsa24_S02_adl_03": "TN -> FP",
+      "gmdcsa24_S04_fall_11": "TP -> FN"
+    },
+    "rtmo_10fps_trk30 vs rtmo_t0.3_dedup": {
+      "caucafall_S08_fall_forward": "TP -> FN",
+      "gmdcsa24_S02_fall_03": "TP -> FN",
+      "gmdcsa24_S02_adl_03": "TN -> FP",
+      "gmdcsa24_S04_fall_11": "TP -> FN"
+    },
+    "rtmo_10fps_trk30_ts vs rtmo_t0.3_dedup": {
+      "caucafall_S08_fall_forward": "TP -> FN",
+      "gmdcsa24_S02_fall_03": "TP -> FN",
+      "gmdcsa24_S02_fall_14": "TP -> FN",
+      "gmdcsa24_S02_adl_03": "TN -> FP",
+      "gmdcsa24_S03_fall_10": "TP -> FN",
+      "gmdcsa24_S03_fall_15": "TP -> FN",
+      "gmdcsa24_S03_fall_16": "TP -> FN",
+      "gmdcsa24_S03_fall_18": "TP -> FN"
+    },
+    "rtmo_t0.3_dedup+stitch vs rtmo_t0.3_dedup": {
+      "caucafall_S03_fall_left": "FN -> TP",
+      "gmdcsa24_S03_fall_19": "FN -> TP"
+    },
+    "rtmo_10fps+stitch vs rtmo_10fps": {
+      "caucafall_S03_fall_left": "FN -> TP",
+      "caucafall_S08_fall_forward": "FN -> TP",
+      "gmdcsa24_S01_fall_02": "FN -> TP",
+      "gmdcsa24_S02_fall_03": "FN -> TP",
+      "gmdcsa24_S03_fall_19": "FN -> TP",
+      "gmdcsa24_S04_fall_11": "FN -> TP"
+    }
+  }
+}

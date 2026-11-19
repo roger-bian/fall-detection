@@ -33,6 +33,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from falldet.stitch import stitch_tracks  # noqa: E402
 from falldet.viz import RED, WHITE, draw_alarm, draw_person, feature_label, rule_text, text  # noqa: E402
 RES = ROOT / "results/rules_v2"
 OUT = RES / "videos"
@@ -44,6 +45,8 @@ def render(job: dict) -> str:
     n, fps = int(r["n_frames"]), float(r["fps"])
     tracks = pd.read_parquet(ROOT / f"data/pose/{job['pose']}/{vid}.tracks.parquet") \
         if job["has_rows"] else pd.DataFrame()
+    if job["stitch"] and len(tracks):
+        tracks = stitch_tracks(tracks, fps)   # same ids as the scored features
     feats = pd.read_parquet(job["feat_path"]) if job["feat_path"] else pd.DataFrame()
     kp_by = {}
     if len(tracks):
@@ -189,7 +192,8 @@ def main() -> int:
             continue
         meta = json.load(open(ROOT / f"data/pose/{pose}/{r['video_id']}.meta.json"))
         jobs.append({"row": r, "res": res_of[r["video_id"]], "pose": pose, "params": params,
-                     "has_rows": meta["rows"] > 0, "feat_path": feat_paths.get(r["video_id"])})
+                     "has_rows": meta["rows"] > 0, "feat_path": feat_paths.get(r["video_id"]),
+                     "stitch": summary.get("stitch", False)})
     done = 0
     with ProcessPoolExecutor(args.workers) as ex:
         for out in ex.map(render, jobs):
