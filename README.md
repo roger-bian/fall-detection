@@ -15,6 +15,8 @@ UV_PROJECT_ENVIRONMENT=.venv-cpu uv sync --extra cpu   # onnxruntime CPU (~1 GB)
 .venv-cpu/bin/python -m falldet.runtime    # providers: CPUExecutionProvider
 ```
 
+Or `make install` (CPU) / `make install-gpu`, which also run the provider check.
+
 Run things with `.venv-gpu/bin/python ...` (or `.venv-cpu`). Plain `uv run` would create
 a third `.venv` without either runtime; to use it, set `UV_PROJECT_ENVIRONMENT=.venv-gpu`
 and pass `--extra gpu`.

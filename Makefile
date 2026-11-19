@@ -1,5 +1,7 @@
-# Launch the live fall-detection demo (scripts/demo_webcam.py).
+# Set up the environments and launch the live fall-detection demo (scripts/demo_webcam.py).
 #
+#   make install                      # create/update the CPU venv (.venv-cpu)
+#   make install-gpu                  # create/update the GPU venv (.venv-gpu, CUDA ~3.3 GB)
 #   make webcam                       # webcam 0 on CPU
 #   make webcam-gpu                   # webcam 0 on GPU
 #   make webcam CAM=1                 # another camera
@@ -13,10 +15,18 @@ PY_CPU := .venv-cpu/bin/python
 PY_GPU := .venv-gpu/bin/python
 DEMO   := scripts/demo_webcam.py
 
-.PHONY: help webcam webcam-gpu
+.PHONY: help install install-gpu webcam webcam-gpu
 
 help:
-	@sed -n '2,8s/^# \{0,1\}//p' Makefile
+	@sed -n '3,10s/^# \{0,1\}//p' Makefile
+
+install:
+	UV_PROJECT_ENVIRONMENT=.venv-cpu uv sync --extra cpu
+	$(PY_CPU) -m falldet.runtime
+
+install-gpu:
+	UV_PROJECT_ENVIRONMENT=.venv-gpu uv sync --extra gpu
+	$(PY_GPU) -m falldet.runtime
 
 webcam: | $(PY_CPU)
 	$(PY_CPU) $(DEMO) --source $(CAM) $(ARGS)
