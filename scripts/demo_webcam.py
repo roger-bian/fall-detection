@@ -89,12 +89,50 @@ class LatestFrame:
         self.thread.join(timeout=2.0)
 
 
-def mac_main_screen() -> tuple[int, int] | None:
-    """macOS: size of the main display in points (the units Cocoa lays windows out in),
-    via CoreGraphics. OpenCV's Cocoa backend can't report the fullscreen window size, and
-    it anchors an image that doesn't fill the screen to the bottom-left corner."""
+def mac_main_screen() -> tuple[tuple[int, int], str] | None:
+    """macOS: the area a fullscreen window gets on the main display, in points (the units
+    Cocoa lays windows out in). Returns ((w, h), how) or None.
+
+    OpenCV's Cocoa backend can't report the fullscreen window size, and it scales an image
+    that doesn't match the window's shape to fit and anchors it bottom-left (gray bars on
+    the top or right). On a notched MacBook the fullscreen area stops below the notch, so
+    the screen height minus NSScreen.safeAreaInsets is used (AppKit via the Objective-C
+    runtime). Fallback: the whole display from CoreGraphics."""
     import ctypes
     import ctypes.util
+    import platform
+
+    class Quad(ctypes.Structure):          # NSRect (x, y, w, h) / NSEdgeInsets (t, l, b, r)
+        _fields_ = [("a", ctypes.c_double), ("b", ctypes.c_double),
+                    ("c", ctypes.c_double), ("d", ctypes.c_double)]
+
+    if platform.machine() == "arm64":     # plain objc_msgSend returns structs on arm64 only
+        try:
+            ctypes.CDLL("/System/Library/Frameworks/AppKit.framework/AppKit")
+            objc = ctypes.CDLL(ctypes.util.find_library("objc") or "/usr/lib/libobjc.A.dylib")
+            objc.objc_getClass.restype = ctypes.c_void_p
+            objc.objc_getClass.argtypes = [ctypes.c_char_p]
+            objc.sel_registerName.restype = ctypes.c_void_p
+            objc.sel_registerName.argtypes = [ctypes.c_char_p]
+            sel = objc.sel_registerName
+            addr = ctypes.cast(objc.objc_msgSend, ctypes.c_void_p).value
+            vp = ctypes.c_void_p
+            send_id = ctypes.CFUNCTYPE(vp, vp, vp)(addr)
+            send_bool = ctypes.CFUNCTYPE(ctypes.c_bool, vp, vp, vp)(addr)
+            send_quad = ctypes.CFUNCTYPE(Quad, vp, vp)(addr)
+            scr = send_id(objc.objc_getClass(b"NSScreen"), sel(b"mainScreen"))
+            if scr:
+                fr = send_quad(scr, sel(b"frame"))
+                w, h, top, bottom = fr.c, fr.d, 0.0, 0.0
+                if send_bool(scr, sel(b"respondsToSelector:"), sel(b"safeAreaInsets")):
+                    ins = send_quad(scr, sel(b"safeAreaInsets"))
+                    top, bottom = ins.a, ins.c
+                if w > 0 and h - top - bottom > 0:
+                    return ((int(w), int(h - top - bottom)),
+                            f"NSScreen {int(w)}x{int(h)}, notch/safe-area inset top {top:g} "
+                            f"bottom {bottom:g}")
+        except (OSError, AttributeError, ValueError):
+            pass
 
     class CGRect(ctypes.Structure):
         _fields_ = [("x", ctypes.c_double), ("y", ctypes.c_double),
@@ -106,9 +144,11 @@ def mac_main_screen() -> tuple[int, int] | None:
         cg.CGDisplayBounds.argtypes = [ctypes.c_uint32]
         cg.CGDisplayBounds.restype = CGRect
         r = cg.CGDisplayBounds(cg.CGMainDisplayID())
-        return (int(r.w), int(r.h)) if r.w > 0 and r.h > 0 else None
+        if r.w > 0 and r.h > 0:
+            return (int(r.w), int(r.h)), "CoreGraphics display bounds (no notch inset)"
     except (OSError, AttributeError):
-        return None
+        pass
+    return None
 
 
 def center_on_screen(img: np.ndarray, sw: int, sh: int) -> np.ndarray:
@@ -152,6 +192,9 @@ def main() -> int:
                     help="fill the monitor the window opens on; the overlay is drawn at that "
                          "monitor's size (read back from the window), so --display-width is "
                          "only the starting size")
+    ap.add_argument("--screen-size", metavar="WxH",
+                    help="with --fullscreen: the visible screen area (e.g. 1512x945) if the "
+                         "auto-detected one leaves gray bars")
     ap.add_argument("--no-stitch", action="store_true",
                     help="use raw tracker ids (default: a person who gets a new tracker id "
                          "mid-fall keeps their history, falldet.stitch)")
@@ -197,8 +240,16 @@ def main() -> int:
     screen = None            # (w, h) of the fullscreen window, once known
     on_mac = sys.platform == "darwin"
     if args.fullscreen and on_mac and not args.no_display:
-        screen = mac_main_screen()
-        print(f"[demo] fullscreen on main display {screen or '(size unknown)'}", flush=True)
+        found = mac_main_screen()
+        screen = found[0] if found else None
+        print(f"[demo] fullscreen area {screen[0]}x{screen[1]} from {found[1]}" if found else
+              "[demo] fullscreen area unknown (try --screen-size WxH)", flush=True)
+    if args.fullscreen and args.screen_size:
+        try:
+            screen = tuple(int(v) for v in args.screen_size.lower().split("x"))
+            assert len(screen) == 2 and min(screen) > 0
+        except (ValueError, AssertionError):
+            sys.exit(f"--screen-size must look like 1512x945, got {args.screen_size!r}")
     writer = None
     events_fh = open(args.events, "a") if args.events else None
     log: deque[str] = deque(maxlen=4)
@@ -288,7 +339,7 @@ def main() -> int:
             writer.write(img if img.shape[1::-1] == rec_size else cv2.resize(img, rec_size))
         if not args.no_display:
             cv2.imshow(win, center_on_screen(img, *screen) if screen else img)
-            if args.fullscreen and not on_mac:
+            if args.fullscreen and not on_mac and not args.screen_size:
                 # Linux/Windows: read the screen size back from the (free-ratio) window;
                 # the next frame is drawn to fit it, centred on a black canvas of exactly
                 # that size. If the backend can't report it, OpenCV stretches the image.
