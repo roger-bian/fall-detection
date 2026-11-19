@@ -89,6 +89,28 @@ class LatestFrame:
         self.thread.join(timeout=2.0)
 
 
+def mac_main_screen() -> tuple[int, int] | None:
+    """macOS: size of the main display in points (the units Cocoa lays windows out in),
+    via CoreGraphics. OpenCV's Cocoa backend can't report the fullscreen window size, and
+    it anchors an image that doesn't fill the screen to the bottom-left corner."""
+    import ctypes
+    import ctypes.util
+
+    class CGRect(ctypes.Structure):
+        _fields_ = [("x", ctypes.c_double), ("y", ctypes.c_double),
+                    ("w", ctypes.c_double), ("h", ctypes.c_double)]
+    try:
+        cg = ctypes.CDLL(ctypes.util.find_library("CoreGraphics")
+                         or "/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")
+        cg.CGMainDisplayID.restype = ctypes.c_uint32
+        cg.CGDisplayBounds.argtypes = [ctypes.c_uint32]
+        cg.CGDisplayBounds.restype = CGRect
+        r = cg.CGDisplayBounds(cg.CGMainDisplayID())
+        return (int(r.w), int(r.h)) if r.w > 0 and r.h > 0 else None
+    except (OSError, AttributeError):
+        return None
+
+
 def center_on_screen(img: np.ndarray, sw: int, sh: int) -> np.ndarray:
     """Place `img` in the middle of a black sw x sh canvas (cropped if it is bigger)."""
     h, w = img.shape[:2]
@@ -173,6 +195,10 @@ def main() -> int:
             cv2.setWindowProperty(win, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     disp_w = args.display_width
     screen = None            # (w, h) of the fullscreen window, once known
+    on_mac = sys.platform == "darwin"
+    if args.fullscreen and on_mac and not args.no_display:
+        screen = mac_main_screen()
+        print(f"[demo] fullscreen on main display {screen or '(size unknown)'}", flush=True)
     writer = None
     events_fh = open(args.events, "a") if args.events else None
     log: deque[str] = deque(maxlen=4)
@@ -211,6 +237,8 @@ def main() -> int:
         ms = 1000 * (time.perf_counter() - t0)
         rule.tick(t)
 
+        if screen:   # fullscreen: fit the video to the screen, keeping its aspect ratio
+            disp_w = max(320, int(min(screen[0], screen[1] * frame.shape[1] / frame.shape[0])))
         s = disp_w / frame.shape[1]
         img = cv2.resize(frame, (disp_w, int(round(frame.shape[0] * s))),
                          interpolation=cv2.INTER_AREA)
@@ -260,15 +288,14 @@ def main() -> int:
             writer.write(img if img.shape[1::-1] == rec_size else cv2.resize(img, rec_size))
         if not args.no_display:
             cv2.imshow(win, center_on_screen(img, *screen) if screen else img)
-            if args.fullscreen:
-                # read the screen size back and draw the next frame to fit it (aspect kept),
-                # centred on a black canvas of exactly that size. Some backends can't
-                # report it; then OpenCV just stretches the image to the screen.
+            if args.fullscreen and not on_mac:
+                # Linux/Windows: read the screen size back from the (free-ratio) window;
+                # the next frame is drawn to fit it, centred on a black canvas of exactly
+                # that size. If the backend can't report it, OpenCV stretches the image.
                 try:
                     _, _, sw, sh = cv2.getWindowImageRect(win)
                     if sw > 0 and sh > 0:
                         screen = (sw, sh)
-                        disp_w = max(320, int(min(sw, sh * frame.shape[1] / frame.shape[0])))
                 except cv2.error:
                     pass
             key = cv2.waitKey(1) & 0xFF
